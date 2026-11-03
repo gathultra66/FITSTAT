@@ -24,12 +24,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
-
-      - uses: android-actions/setup-android@v3
 
       - uses: gradle/actions/setup-gradle@v4
 
@@ -42,12 +40,13 @@ jobs:
         if: ${{ !cancelled() }}
         run: ./gradlew --no-daemon --console=plain --continue :app:testDebugUnitTest 2>&1 | tee test.log
 
-      # Deja los errores (y el final del registro) como anotaciones, que se leen sin iniciar sesión.
-      - name: Resumen de errores
+      # Deja los errores, el final del registro y el conteo de pruebas como anotaciones (se leen sin iniciar sesión).
+      - name: Resumen de resultados
         if: ${{ !cancelled() }}
         run: |
           python3 - <<'PY'
-          import os
+          import glob, os
+          import xml.etree.ElementTree as ET
 
           def esc(s):
               return s.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
@@ -72,6 +71,30 @@ jobs:
               if errs:
                   print('::error title=%s errores::%s' % (name, esc('\n'.join(errs)[:3500])))
               print('::notice title=%s final del registro::%s' % (name, esc('\n'.join(lines[-30:])[-3500:])))
+
+          files = sorted(glob.glob('app/build/test-results/testDebugUnitTest/TEST-*.xml'))
+          if files:
+              total = fails = errors = skipped = 0
+              per_class = []
+              failed = []
+              for p in files:
+                  root = ET.parse(p).getroot()
+                  t, f, e, s = (int(root.get(k, 0)) for k in ('tests', 'failures', 'errors', 'skipped'))
+                  total += t
+                  fails += f
+                  errors += e
+                  skipped += s
+                  per_class.append('%s=%d' % (root.get('name', os.path.basename(p)).split('.')[-1], t))
+                  for tc in root.iter('testcase'):
+                      for bad in list(tc.findall('failure')) + list(tc.findall('error')):
+                          failed.append('%s.%s: %s' % (tc.get('classname', '').split('.')[-1], tc.get('name'), (bad.get('message') or '')[:200]))
+              head = 'Pruebas: %d en %d clases, %d fallos, %d errores, %d omitidas' % (total, len(files), fails, errors, skipped)
+              body = head + '\n' + ', '.join(per_class)
+              print('::notice title=Resultado de las pruebas::%s' % esc(body[:3500]))
+              if failed:
+                  print('::error title=Pruebas que fallaron::%s' % esc('\n'.join(failed)[:3500]))
+          else:
+              print('::warning title=Resultado de las pruebas::No se encontraron reportes XML de pruebas')
           PY
 
       - name: Guardar el APK de prueba
