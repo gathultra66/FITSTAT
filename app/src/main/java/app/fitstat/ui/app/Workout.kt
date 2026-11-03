@@ -21,8 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import app.fitstat.bot.WorkoutStatus
 import app.fitstat.data.Fmt
+import app.fitstat.data.awaitWallClock
 import app.fitstat.ui.design.Ic
-import kotlinx.coroutines.delay
 
 /**
  * Entrenamiento guiado en curso. Vive en [AppState] para que no se pierda al salir de la pantalla
@@ -224,6 +224,7 @@ val AppState.workoutActive: Boolean get() = workout?.let { !it.done } == true
 /**
  * Vigila el descanso del entrenamiento en curso aunque cambies de pantalla: cuando llega a cero
  * avisa con vibración y/o sonido según el ajuste "Aviso al terminar el descanso".
+ * Si el teléfono se duerme con la pantalla apagada, a la hora lo despierta una alarma del sistema (RestAlarm).
  */
 @Composable
 fun WorkoutRestWatcher(app: AppState) {
@@ -232,13 +233,26 @@ fun WorkoutRestWatcher(app: AppState) {
     val ctx = LocalContext.current
     LaunchedEffect(s, end) {
         if (s == null || end <= 0L) return@LaunchedEffect
-        val wait = end - app.repo.now()
-        if (wait > 0L) delay(wait)
-        if (s.restEndsAt == end) {
-            s.finishRest(app.repo.now())
-            restAlert(ctx, app.repo.prefs.str("train.rest_alert"))
-        }
+        awaitWallClock(end, app.repo.now)
+        app.finishRestIfDue(ctx)
     }
+}
+
+/** Cuánto antes de la hora se acepta terminar el descanso (los relojes pueden diferir unos milisegundos). */
+private const val REST_DUE_SLACK_MS = 1_000L
+
+/**
+ * Termina el descanso si ya le tocaba y avisa (vibración/sonido). Devuelve true si lo terminó ahora.
+ * Lo pueden llamar la pantalla y la alarma del sistema: solo la primera vez hace algo.
+ */
+fun AppState.finishRestIfDue(ctx: Context): Boolean {
+    val s = workout?.takeIf { !it.done } ?: return false
+    val end = s.restEndsAt
+    val now = repo.now()
+    if (end <= 0L || now + REST_DUE_SLACK_MS < end) return false
+    s.finishRest(now)
+    restAlert(ctx, repo.prefs.str("train.rest_alert"))
+    return true
 }
 
 fun restAlert(ctx: Context, mode: String) {

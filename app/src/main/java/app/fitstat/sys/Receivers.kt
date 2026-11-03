@@ -3,8 +3,11 @@ package app.fitstat.sys
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.core.app.NotificationManagerCompat
 import app.fitstat.FitstatApp
+import app.fitstat.ui.app.finishRestIfDue
 
 /** Ejecuta [work] fuera del hilo principal sin que el sistema mate el receptor a medias. */
 private fun BroadcastReceiver.background(work: () -> Unit) {
@@ -19,7 +22,7 @@ private fun BroadcastReceiver.background(work: () -> Unit) {
     }.start()
 }
 
-/** Suena la alarma de un recordatorio, se pospone, o toca refrescar los widgets a medianoche. */
+/** Suena la alarma de un recordatorio, se pospone, toca refrescar los widgets a medianoche, o termina el descanso. */
 class ReminderReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context, intent: Intent) {
         val app = ctx.applicationContext as? FitstatApp ?: return
@@ -40,6 +43,14 @@ class ReminderReceiver : BroadcastReceiver() {
             Widgets.ACTION_REFRESH -> background {
                 Widgets.refreshAll(ctx)
                 Widgets.scheduleMidnight(ctx)
+            }
+            RestAlarm.ACTION_END -> {
+                // Si la app no está viva no hay descanso que terminar: no se crea todo su estado solo para mirar.
+                val state = app.stateOrNull ?: return
+                val pending = goAsync()
+                if (state.finishRestIfDue(ctx)) state.connectors.rest.onRestEnd()
+                // Se mantiene el receptor un momento para que el teléfono no vuelva a dormirse antes de que arranque la música.
+                Handler(Looper.getMainLooper()).postDelayed({ pending.finish() }, 3_000L)
             }
         }
     }

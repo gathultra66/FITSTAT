@@ -9,9 +9,9 @@ import androidx.compose.runtime.snapshotFlow
 import app.fitstat.data.Repo
 import app.fitstat.data.Sleep
 import app.fitstat.data.SleepSession
+import app.fitstat.data.awaitWallClock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -351,7 +351,7 @@ class ConnectorHub(
             snapshotFlow(restEndsAt).collectLatest { end ->
                 if (end > 0L) {
                     rest.onRestStart()
-                    delay((end - now()).coerceAtLeast(0L))
+                    awaitWallClock(end, now)
                     rest.onRestEnd()
                 } else {
                     rest.onRestEnd()

@@ -1,4 +1,4 @@
-# FITSTAT 1.9.1 — código fuente
+# FITSTAT 1.9.2 — código fuente
 
 App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, Android 8.0 o superior.
 
@@ -11,11 +11,16 @@ App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, A
 - `fitstat.keystore` (alias `fitstat`; la contraseña se guarda aparte, en la variable de entorno `FITSTAT_KEY_PASSWORD`) es la llave con la que se firma el APK. Por seguridad, no está incluida en este repositorio.
 - Para **actualizar** la app sin desinstalarla (y sin perder tus datos) hay que firmar siempre con esta misma llave.
   Si la pierdes, tendrás que desinstalar e instalar de nuevo.
-- Si publicas el código en un sitio público, cambia primero la llave y sus contraseñas (están en `app/build.gradle.kts`).
+- Si publicas el código en un sitio público, no incluyas la keystore ni su contraseña (el build la lee de `FITSTAT_KEY_PASSWORD`, no está escrita en el código).
 
 ## FITBOT
 - En *Ajustes › FITBOT y API* pega tu clave de OpenRouter y elige el modelo (por defecto `xiaomi/mimo-v2.6-flash`).
 - La clave se guarda cifrada en el teléfono y no se incluye al exportar tus datos.
+
+## Fin del descanso (v1.9.2)
+- Causa del error: la pantalla calculaba el descanso con el reloj de pared, pero el aviso de fin y la reanudación de la música esperaban con un `delay()`, que solo cuenta el tiempo con el teléfono despierto. Al pausar la música el teléfono se dormía con la pantalla apagada, el `delay` se congelaba y el descanso se quedaba en 0:00 (y la música sin volver) hasta que el teléfono despertaba y se cumplía el tiempo que faltaba.
+- Arreglo: `data/WallClock.kt` (`awaitWallClock`) espera en tramos de 500 ms mirando el reloj de pared en cada uno; lo usan `WorkoutRestWatcher` y `ConnectorHub.watchRest`. `sys/RestAlarm.kt` programa una alarma del sistema (`AlarmManager`, como los recordatorios) para la hora de fin; `ReminderReceiver` la atiende con `AppState.finishRestIfDue` + `MusicRestCoordinator.onRestEnd`. Las dos rutas son idempotentes: da igual cuál llegue primero.
+- Pruebas: `WallClockTest` (y las de `watchRest` en `ConnectorsTest`, que usan tiempo simulado y deben seguir igual). Límites: no se compiló ni se probó en un teléfono; la alarma exacta depende de que el sistema la permita (si no, se usa una aproximada que puede tardar), y la receptora no hace nada si el sistema ya cerró la app.
 
 ## Portadas de NAMSTAT (v1.9.1)
 - NAMSTAT publica en su MediaSession solo `DISPLAY_ICON_URI` = el `content://media/…` del audio (sin bitmap), que FITSTAT no puede abrir (no tiene permiso sobre la música). `NamidaPlayer` ahora convierte ese enlace con `NamstatPackage.artUri` a `content://com.namstat.player.tat/art?u=…&size=640`, que NAMSTAT 1.2.1+ sirve desde `TatProvider.openFile` (solo apps permitidas, solo `content://media/`). Prueba: `NamstatTest.sharedAudioLinksBecomeArtRequests`. Límites: la parte del proveedor (NAMSTAT) no tiene prueba automática y no se vio en un teléfono; si el ajuste «carátula en la notificación» de NAMSTAT está apagado, NAMSTAT no comparte ningún enlace y no hay portada.

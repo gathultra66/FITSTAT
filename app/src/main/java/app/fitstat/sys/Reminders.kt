@@ -48,7 +48,7 @@ object Reminders {
         return am.canScheduleExactAlarms()
     }
 
-    private fun setAlarm(ctx: Context, am: AlarmManager, at: Long, pi: PendingIntent) {
+    internal fun setAlarm(ctx: Context, am: AlarmManager, at: Long, pi: PendingIntent) {
         try {
             if (canScheduleExact(ctx)) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
             else am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)

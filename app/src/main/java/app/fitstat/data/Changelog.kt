@@ -6,6 +6,17 @@ class ChangelogEntry(val version: String, val date: String, val title: String, v
 object Changelog {
     val entries: List<ChangelogEntry> = listOf(
         ChangelogEntry(
+            version = "1.9.2",
+            date = "3 nov 2026",
+            title = "El descanso termina a tiempo",
+            sections = listOf(
+                "Corrección" to listOf(
+                    "Corregido: el cronómetro de descanso podía quedarse en 0:00 un buen rato y la música no volvía. Al empezar el descanso FITSTAT pausa la música, y con ella se iba lo único que mantenía despierto al teléfono: con la pantalla apagada se dormía y el cronómetro interno se congelaba mientras el reloj seguía avanzando.",
+                    "Ahora el final del descanso lo marca una alarma del sistema que despierta al teléfono a su hora, y el cronómetro revisa el reloj en tramos cortos para ponerse al corriente al instante si el teléfono estuvo dormido. La música se reanuda (con su subida de volumen) y suena el aviso justo al llegar a cero.",
+                ),
+            ),
+        ),
+        ChangelogEntry(
             version = "1.9.1",
             date = "31 oct 2026",
             title = "Las portadas de NAMSTAT",

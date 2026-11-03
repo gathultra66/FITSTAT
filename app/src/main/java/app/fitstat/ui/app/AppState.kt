@@ -20,6 +20,7 @@ import app.fitstat.conn.RhythmEngine
 import app.fitstat.conn.VisualizerTap
 import app.fitstat.data.LayoutPage
 import app.fitstat.data.Repo
+import app.fitstat.sys.RestAlarm
 import app.fitstat.ui.design.Ic
 import app.fitstat.ui.design.Overlays
 import kotlinx.coroutines.CoroutineScope
@@ -93,6 +94,8 @@ class AppState(
     init {
         // La música (Namida, Spotify o YouTube Music) se pausa mientras dura el descanso entre series y vuelve sola al terminar.
         this.connectors.watchRest({ workout?.takeIf { !it.done }?.restEndsAt ?: 0L }, { repo.now() })
+        // Una alarma del sistema despierta al teléfono cuando termina el descanso (con la música pausada y la pantalla apagada se duerme).
+        RestAlarm.watch(context, scope, { workout?.takeIf { !it.done }?.restEndsAt ?: 0L })
         // NAMSTAT se entera de cuándo entrenas (y puede poner tu lista de entreno).
         this.connectors.watchWorkout { workout?.takeIf { !it.done }?.let { w -> w.routineId?.let { id -> repo.routine(id)?.name } ?: "Entrenamiento libre" } }
     }

@@ -15,8 +15,8 @@ android {
         applicationId = "app.fitstat"
         minSdk = 26
         targetSdk = 35
-        versionCode = 16
-        versionName = "1.9.1"
+        versionCode = 17
+        versionName = "1.9.2"
     }
 
     // La llave de firma NO está en el repositorio. Para firmar, coloca fitstat.keystore

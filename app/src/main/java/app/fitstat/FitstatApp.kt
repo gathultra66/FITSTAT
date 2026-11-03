@@ -13,7 +13,11 @@ class FitstatApp : Application() {
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     lateinit var repo: Repo
         private set
-    val state: AppState by lazy { AppState(this, repo, scope) }
+    private val stateLazy = lazy { AppState(this, repo, scope) }
+    val state: AppState get() = stateLazy.value
+
+    /** El estado de la app si ya existe: un receptor no debe crearlo entero solo para mirar si hay algo que hacer. */
+    val stateOrNull: AppState? get() = if (stateLazy.isInitialized()) stateLazy.value else null
 
     override fun onCreate() {
         super.onCreate()
