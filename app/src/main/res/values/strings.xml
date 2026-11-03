@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FITSTAT</string>
+
+    <string name="widget_today">FITSTAT · Hoy</string>
+    <string name="widget_bot">FITSTAT · FITBOT</string>
+    <string name="widget_week">FITSTAT · Racha</string>
+    <string name="widget_records">FITSTAT · Récords</string>
+    <string name="widget_today_desc">Tu entrenamiento de hoy y el avance de tu meta semanal.</string>
+    <string name="widget_bot_desc">FITBOT te saluda y te dice qué toca. Tócalo para chatear.</string>
+    <string name="widget_week_desc">Los 7 días de tu semana de un vistazo, con tu racha.</string>
+    <string name="widget_records_desc">Tus últimos récords personales.</string>
+
+    <string name="shortcut_routines">Rutinas</string>
+    <string name="shortcut_routines_long">Mis rutinas</string>
+    <string name="shortcut_bot">FITBOT</string>
+    <string name="shortcut_bot_long">Hablar con FITBOT</string>
+    <string name="shortcut_stats">Progreso</string>
+    <string name="shortcut_stats_long">Ver mi progreso</string>
+</resources>

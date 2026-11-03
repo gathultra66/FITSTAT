@@ -1,0 +1,444 @@
+# id_dataset|Nombre|categoria|equipo(opcional)|alias1,alias2|Descripción
+# ---------------- PECHO ----------------
+Barbell_Bench_Press_-_Medium_Grip|Press de banca con barra|pecho||press banca,bench press,banca plana,press plano|El clásico para pecho: acostado en el banco, baja la barra hasta el pecho y empuja hasta extender los codos.
+Barbell_Incline_Bench_Press_-_Medium_Grip|Press inclinado con barra|pecho||press inclinado,incline bench,banca inclinada|En banco inclinado; carga más la parte alta del pecho y los hombros.
+Decline_Barbell_Bench_Press|Press declinado con barra|pecho||press declinado,decline bench|En banco declinado; enfatiza la parte baja del pecho con buen control del peso.
+Wide-Grip_Barbell_Bench_Press|Press de banca agarre ancho|pecho||agarre ancho,press ancho|Agarre más abierto que el normal para exigir más al pecho y menos a los tríceps.
+Dumbbell_Bench_Press|Press plano con mancuernas|pecho||press mancuernas,dumbbell press,pesas|Más rango de movimiento que con barra y cada brazo trabaja por separado.
+Incline_Dumbbell_Press|Press inclinado con mancuernas|pecho||incline dumbbell,press inclinado mancuernas|Empuje en banco inclinado con mancuernas para el pecho superior.
+Decline_Dumbbell_Bench_Press|Press declinado con mancuernas|pecho||declinado mancuernas|Press en banco declinado con mancuernas; trabaja la porción baja del pecho.
+Dumbbell_Flyes|Aperturas con mancuernas|pecho||aperturas,flyes,vuelos|Abre los brazos en arco con ligera flexión de codos para estirar y contraer el pecho.
+Incline_Dumbbell_Flyes|Aperturas inclinadas con mancuernas|pecho||aperturas inclinadas|Aperturas en banco inclinado para enfocar la parte alta del pecho.
+Cable_Crossover|Cruce de poleas|pecho||cruce poleas,crossover,cable fly|Desde poleas altas, junta las manos al frente del pecho con tensión constante.
+Low_Cable_Crossover|Cruce de poleas bajo|pecho||cruce bajo,low cable|Poleas bajas y movimiento hacia arriba; trabaja la parte superior del pecho.
+Butterfly|Aperturas en máquina (pec deck)|pecho||contractora,pec deck,mariposa,peck deck|Máquina guiada para aislar el pecho; junta los brazos al frente sin compensar con los hombros.
+Leverage_Chest_Press|Press de pecho en máquina|pecho||press maquina,chest press|Empuje guiado, ideal para llegar a la fatiga con seguridad.
+Cable_Chest_Press|Press de pecho en polea|pecho||press polea|Empuje de pecho en poleas con tensión constante y libertad para ajustar el recorrido.
+Dips_-_Chest_Version|Fondos en paralelas (pecho)|pecho|Paralelas|dips,fondos|Inclina el torso hacia adelante y baja controlado; empuja con el pecho al subir.
+Pushups|Lagartijas|pecho||flexiones,push ups,pushups,lagartijas|Clásico de peso corporal: manos al ancho de hombros, cuerpo recto y pecho al piso.
+Incline_Push-Up|Lagartijas inclinadas|pecho||lagartijas con manos elevadas|Con las manos elevadas es más fácil; ideal para principiantes o para sumar volumen.
+Decline_Push-Up|Lagartijas declinadas|pecho||pies elevados|Con los pies elevados aumenta la carga sobre pecho superior y hombros.
+Bent-Arm_Dumbbell_Pullover|Pullover con mancuerna|pecho||pull over,pullover|Baja la mancuerna detrás de la cabeza con codos semiflexionados para expandir el pecho.
+Smith_Machine_Bench_Press|Press de banca en Smith|pecho||smith,press smith|Press de banca en máquina Smith: trayectoria guiada para empujar fuerte con estabilidad.
+Machine_Bench_Press|Press de banca en máquina|pecho||press pecho maquina|Press de pecho en máquina con agarre fijo y trayectoria controlada.
+# ---------------- ESPALDA ----------------
+Pullups|Dominadas|espalda|Barra fija|pull ups,pullups,barra fija,dominada|Cuélgate de la barra y sube hasta pasar la barbilla; excelente para dorsales y bíceps.
+Chin-Up|Dominadas supinas|espalda|Barra fija|chin up,dominadas agarre supino|Agarre supino (palmas hacia ti); involucra más el bíceps.
+Wide-Grip_Lat_Pulldown|Jalón al pecho agarre ancho|espalda||jalon,lat pulldown,jalon al pecho|Baja la barra hacia el pecho llevando los codos abajo; construye ancho de espalda.
+Close-Grip_Front_Lat_Pulldown|Jalón agarre cerrado|espalda||jalón cerrado|Agarre estrecho para mayor recorrido y trabajo en la zona baja de los dorsales.
+Underhand_Cable_Pulldowns|Jalón agarre supino|espalda||jalón invertido|Jalón con palmas hacia ti: más participación de bíceps y dorsales bajos.
+V-Bar_Pulldown|Jalón con triángulo|espalda||jalón v,triángulo|Jalón con agarre neutro (triángulo) para un buen recorrido y trabajo de dorsales.
+Bent_Over_Barbell_Row|Remo con barra|espalda||remo barra,barbell row|Torso inclinado y espalda recta; jala la barra hacia el abdomen.
+Reverse_Grip_Bent-Over_Rows|Remo con barra agarre supino|espalda||remo supino,yates row|Remo inclinado con palmas hacia arriba, más trabajo de dorsal inferior y bíceps.
+One-Arm_Dumbbell_Row|Remo con mancuerna a una mano|espalda||remo mancuerna,serrucho,dumbbell row|Apoyado en un banco, jala la mancuerna hacia la cadera con la espalda firme.
+Bent_Over_Two-Dumbbell_Row|Remo con dos mancuernas|espalda||remo dos mancuernas|Remo inclinado con una mancuerna en cada mano para trabajar toda la espalda media.
+Seated_Cable_Rows|Remo en polea baja|espalda||remo sentado,remo polea,seated row|Sentado, jala el agarre hacia el abdomen juntando los omóplatos.
+Seated_One-arm_Cable_Pulley_Rows|Remo en polea a una mano|espalda||remo unilateral polea|Remo con un solo brazo para corregir desbalances y rotar un poco el torso.
+T-Bar_Row_with_Handle|Remo en barra T|espalda||remo t,t bar row|Pesado y estable: jala la barra en T hacia el pecho con la espalda neutra.
+Leverage_Iso_Row|Remo en máquina|espalda||remo maquina|Remo guiado con soporte de pecho; aísla dorsales y espalda media.
+Straight-Arm_Pulldown|Jalón con brazos rectos|espalda||pullover polea,straight arm|Con brazos casi rectos baja la barra hacia los muslos para aislar los dorsales.
+Inverted_Row|Remo invertido|espalda|Barra baja|remo en barra baja,australian pull up|Bajo una barra, jala el pecho hacia ella con el cuerpo en línea recta.
+Barbell_Deadlift|Peso muerto|espalda||deadlift,peso muerto convencional|Levanta la barra del piso hasta ponerte de pie con la espalda neutra; trabaja toda la cadena posterior.
+Rack_Pulls|Peso muerto desde rack|espalda||rack pull|Peso muerto con recorrido corto desde bloques o rack; sobrecarga la espalda alta y el agarre.
+Trap_Bar_Deadlift|Peso muerto con barra hexagonal|espalda|Barra hexagonal|trap bar,hex bar|Peso muerto con barra hexagonal: más amigable para la espalda baja y con mucha pierna.
+Hyperextensions_Back_Extensions|Hiperextensiones|espalda|Banco romano|extensiones lumbares,back extension,banco romano|Extiende el torso en el banco romano para fortalecer lumbares y glúteos.
+Good_Morning|Buenos días con barra|espalda||good morning|Inclínate desde la cadera con la barra en la espalda; trabaja lumbares e isquiotibiales.
+# ---------------- HOMBRO ----------------
+Standing_Military_Press|Press militar de pie|hombro||press militar,overhead press,press de hombro con barra|Empuja la barra desde los hombros hasta arriba de la cabeza, con el core firme.
+Seated_Barbell_Military_Press|Press militar sentado|hombro||press sentado con barra|Press de hombro sentado con respaldo; menos balanceo y más enfoque en deltoides.
+Dumbbell_Shoulder_Press|Press de hombro con mancuernas|hombro||press hombro,shoulder press|Empuje vertical con mancuernas; permite un recorrido natural de cada brazo.
+Arnold_Dumbbell_Press|Press Arnold|hombro||arnold press|Press con rotación de muñecas durante el movimiento para trabajar todo el deltoides.
+Side_Lateral_Raise|Elevaciones laterales|hombro||vuelos laterales,lateral raise|Sube las mancuernas a los lados hasta la altura de los hombros; da ancho al deltoides.
+Seated_Side_Lateral_Raise|Elevaciones laterales sentado|hombro||laterales sentado|Elevaciones laterales sentado para evitar impulso y aislar mejor el deltoides medio.
+Standing_Low-Pulley_Deltoid_Raise|Elevación lateral en polea baja|hombro||lateral polea|Elevación lateral con polea baja: tensión constante en todo el recorrido.
+Front_Dumbbell_Raise|Elevaciones frontales|hombro||front raise|Sube las mancuernas al frente hasta la altura de los ojos; trabaja el deltoides anterior.
+Reverse_Flyes|Pájaros con mancuernas|hombro||vuelos posteriores,rear delt,pajaros|Inclinado al frente, abre los brazos para el deltoides posterior y la espalda alta.
+Seated_Bent-Over_Rear_Delt_Raise|Pájaros sentado|hombro||deltoide posterior|Sentado e inclinado, eleva las mancuernas a los lados para el deltoides posterior.
+Reverse_Machine_Flyes|Pájaros en máquina|hombro||contractora inversa,reverse pec deck|En la contractora a la inversa, abre los brazos hacia atrás para el deltoides posterior.
+Face_Pull|Face pull|hombro||jalón a la cara,face pulls|Jala la cuerda hacia el rostro con codos altos; salud de hombros y deltoides posterior.
+Upright_Barbell_Row|Remo al mentón con barra|hombro||remo al mentón,upright row|Sube la barra pegada al cuerpo hasta el pecho alto; trabaja deltoides y trapecio.
+Dumbbell_Shrug|Encogimientos con mancuernas|hombro||trapecio,shrugs,encogimientos|Eleva los hombros hacia las orejas sosteniendo mancuernas; trabaja el trapecio superior.
+Barbell_Shrug|Encogimientos con barra|hombro||trapecio barra,shrug barra|Encogimientos con barra para cargar más peso en el trapecio.
+Machine_Shoulder_Military_Press|Press de hombro en máquina|hombro||press hombro maquina|Press vertical guiado, cómodo para ir a la falla de forma segura.
+Smith_Machine_Overhead_Shoulder_Press|Press de hombro en Smith|hombro||press militar smith|Press por encima de la cabeza en máquina Smith.
+Front_Cable_Raise|Elevación frontal en polea|hombro||frontal polea|Elevación frontal con polea baja; tensión constante en el deltoides anterior.
+Cable_Rear_Delt_Fly|Pájaros en polea|hombro||polea deltoide posterior|Aperturas cruzadas en polea para el deltoides posterior.
+Band_Pull_Apart|Pull apart con banda|hombro|Banda elástica|apertura con liga,band pull apart|Separa una banda elástica con los brazos extendidos; activa la espalda alta y el deltoides posterior.
+# ---------------- BÍCEPS ----------------
+Barbell_Curl|Curl con barra|biceps||curl barra,curl de biceps|El básico para bíceps: sube la barra sin balancear el torso.
+EZ-Bar_Curl|Curl con barra Z|biceps||curl barra z,ez curl|Curl con barra Z; el agarre inclinado cuida las muñecas.
+Dumbbell_Alternate_Bicep_Curl|Curl alterno con mancuernas|biceps||curl alterno|Sube una mancuerna a la vez, girando la muñeca para contraer más el bíceps.
+Dumbbell_Bicep_Curl|Curl con mancuernas|biceps||curl mancuernas|Curl con ambos brazos a la vez, controlando la bajada.
+Hammer_Curls|Curl martillo|biceps||hammer curl,martillo|Agarre neutro (palmas enfrentadas); trabaja braquial, bíceps y antebrazo.
+Concentration_Curls|Curl concentrado|biceps||concentrado|Sentado, codo apoyado en el muslo; aísla el bíceps y siente la contracción.
+Preacher_Curl|Curl predicador|biceps||curl scott,preacher|Con el brazo apoyado en el banco Scott; evita el impulso y aísla el bíceps.
+Machine_Preacher_Curls|Curl predicador en máquina|biceps||curl scott maquina|Curl en máquina Scott: trayectoria guiada para aislar el bíceps.
+Incline_Dumbbell_Curl|Curl inclinado con mancuernas|biceps||curl inclinado|En banco inclinado el bíceps se estira más; excelente para la cabeza larga.
+Standing_Biceps_Cable_Curl|Curl en polea baja|biceps||curl polea|Curl de pie con polea: tensión continua durante todo el recorrido.
+High_Cable_Curls|Curl en polea alta|biceps||doble biceps polea|Pose de doble bíceps con las poleas altas; gran contracción final.
+Cable_Hammer_Curls_-_Rope_Attachment|Curl martillo en polea con cuerda|biceps||martillo cuerda|Curl neutro con cuerda; braquial y antebrazo.
+Reverse_Barbell_Curl|Curl inverso con barra|biceps||curl inverso,antebrazo|Agarre prono (palmas abajo); fortalece antebrazo y braquial.
+Zottman_Curl|Curl Zottman|biceps||zottman|Sube con palmas arriba y baja con palmas abajo; bíceps y antebrazo a la vez.
+Palms-Up_Barbell_Wrist_Curl_Over_A_Bench|Curl de muñeca con barra|biceps||antebrazo,wrist curl|Con antebrazos apoyados, flexiona la muñeca para trabajar el antebrazo.
+Palms-Down_Wrist_Curl_Over_A_Bench|Extensión de muñeca con barra|biceps||extensores antebrazo|Palmas abajo; trabaja los extensores del antebrazo y equilibra el agarre.
+Spider_Curl|Curl araña|biceps|Barra Z|curl spider|Pecho apoyado en banco inclinado y brazos colgando; máxima tensión en el bíceps sin impulso.
+Machine_Bicep_Curl|Curl de bíceps en máquina|biceps||curl maquina|Curl guiado en máquina para llevar el bíceps a la fatiga.
+Farmers_Walk|Caminata del granjero|biceps|Mancuernas|farmer walk,agarre|Camina cargando mucho peso en cada mano; antebrazos, agarre y core.
+# ---------------- TRÍCEPS ----------------
+Triceps_Pushdown|Extensión de tríceps en polea|triceps||pushdown,jalón de tríceps,extension polea|Empuja la barra hacia abajo extendiendo los codos; el básico para tríceps.
+Triceps_Pushdown_-_Rope_Attachment|Extensión de tríceps con cuerda|triceps||cuerda triceps,rope pushdown|Con cuerda separas las manos al final para una contracción más fuerte.
+Reverse_Grip_Triceps_Pushdown|Extensión de tríceps agarre invertido|triceps||pushdown supino|Agarre supino en polea; cambia el énfasis hacia la cabeza medial.
+EZ-Bar_Skullcrusher|Press francés con barra Z|triceps||skull crusher,rompecráneos,press frances|Acostado, baja la barra hacia la frente flexionando solo los codos.
+Standing_Dumbbell_Triceps_Extension|Extensión sobre la cabeza con mancuerna|triceps||press frances mancuerna,overhead extension|Mancuerna sobre la cabeza; estira bien la cabeza larga del tríceps.
+Triceps_Overhead_Extension_with_Rope|Extensión sobre la cabeza con cuerda|triceps||cuerda sobre la cabeza|Extensión sobre la cabeza con polea y cuerda; tensión constante.
+Bench_Dips|Fondos en banco|triceps|Banco|fondos banco,dips banco|Manos en el banco y piernas al frente; baja y sube con los tríceps.
+Dips_-_Triceps_Version|Fondos en paralelas (tríceps)|triceps|Paralelas|dips triceps,fondos triceps|Torso vertical y codos pegados; fuerte para tríceps y pecho.
+Close-Grip_Barbell_Bench_Press|Press de banca agarre cerrado|triceps||press cerrado,close grip|Press con agarre estrecho; carga más los tríceps.
+Tricep_Dumbbell_Kickback|Patada de tríceps|triceps||kickback,patada triceps|Inclinado, extiende el codo hacia atrás para aislar el tríceps.
+Machine_Triceps_Extension|Extensión de tríceps en máquina|triceps||triceps maquina|Extensión guiada para fatigar el tríceps con seguridad.
+Dip_Machine|Fondos en máquina|triceps||fondos maquina,dips maquina|Fondos asistidos o guiados en máquina.
+Cable_One_Arm_Tricep_Extension|Extensión de tríceps a una mano en polea|triceps||triceps unilateral|Extensión a un brazo en polea para equilibrar fuerza entre lados.
+Push-Ups_-_Close_Triceps_Position|Lagartijas cerradas|triceps||lagartijas diamante,diamond push up|Manos juntas bajo el pecho; los tríceps toman la mayor parte del trabajo.
+Seated_Triceps_Press|Press de tríceps sentado|triceps||press triceps mancuerna|Sentado, sube una mancuerna sobre la cabeza y extiende los codos.
+# ---------------- PIERNA ----------------
+Barbell_Squat|Sentadilla con barra|pierna||sentadilla,squat,sentadillas|Rey de los ejercicios de pierna: baja con la espalda recta hasta que los muslos queden paralelos al piso.
+Barbell_Full_Squat|Sentadilla profunda con barra|pierna||sentadilla completa,full squat|Sentadilla bajando por debajo de paralelo; más rango y más trabajo de glúteo.
+Front_Barbell_Squat|Sentadilla frontal|pierna||front squat|Con la barra al frente, el torso se mantiene más vertical y trabaja más el cuádriceps.
+Goblet_Squat|Sentadilla goblet|pierna||goblet|Sostén una mancuerna o kettlebell frente al pecho; ideal para aprender la técnica.
+Leg_Press|Prensa de pierna|pierna||prensa,leg press|Empuja la plataforma con las piernas; carga pesado con poca exigencia en la espalda.
+Hack_Squat|Sentadilla hack|pierna||hack,sentadilla hack|En máquina hack, con la espalda apoyada; gran enfoque en cuádriceps.
+Smith_Machine_Squat|Sentadilla en Smith|pierna||smith squat|Sentadilla en máquina Smith con trayectoria guiada.
+Dumbbell_Lunges|Desplantes con mancuernas|pierna||zancadas,lunges,desplantes|Da un paso largo y baja la rodilla trasera; pierna y glúteo con equilibrio.
+Barbell_Walking_Lunge|Desplantes caminando con barra|pierna||zancadas caminando,walking lunge|Desplantes avanzando con barra; exigente para pierna, glúteo y equilibrio.
+Dumbbell_Rear_Lunge|Desplante hacia atrás|pierna||zancada atrás,reverse lunge|Da el paso hacia atrás; más amigable con las rodillas.
+Split_Squat_with_Dumbbells|Sentadilla dividida con mancuernas|pierna||sentadilla bulgara,bulgara,split squat|Una pierna adelante y otra atrás; baja en vertical con mancuernas.
+Leg_Extensions|Extensión de cuádriceps|pierna||sillón de cuádriceps,leg extension|Extiende las rodillas en la máquina para aislar el cuádriceps.
+Lying_Leg_Curls|Curl femoral tumbado|pierna||curl femoral,leg curl,isquios|Boca abajo, flexiona las rodillas llevando los talones al glúteo.
+Seated_Leg_Curl|Curl femoral sentado|pierna||curl femoral sentado|Sentado, flexiona las rodillas contra la resistencia; isquiotibiales.
+Standing_Leg_Curl|Curl femoral de pie|pierna||curl femoral unilateral|Curl femoral de pie, una pierna a la vez.
+Romanian_Deadlift|Peso muerto rumano|pierna||rumano,rdl,romanian|Cadera atrás con rodillas ligeramente flexionadas; estira y trabaja isquios y glúteos.
+Stiff-Legged_Barbell_Deadlift|Peso muerto con piernas rígidas|pierna||stiff,piernas rigidas|Variante con piernas casi rectas; más estiramiento en isquiotibiales.
+Stiff-Legged_Dumbbell_Deadlift|Peso muerto rumano con mancuernas|pierna||rumano mancuernas|Peso muerto rumano con mancuernas, ideal para aprender el movimiento.
+Sumo_Deadlift|Peso muerto sumo|pierna||sumo|Postura ancha y agarre estrecho; más aductores, glúteos y cuádriceps.
+Thigh_Abductor|Abducción de cadera en máquina|pierna||abductores,maquina abductor|Abre las piernas contra la resistencia; glúteo medio y abductores.
+Thigh_Adductor|Aducción de cadera en máquina|pierna||aductores,maquina aductor|Cierra las piernas contra la resistencia; trabaja la cara interna del muslo.
+Dumbbell_Step_Ups|Subidas al cajón con mancuernas|pierna||step up,subidas,escalón|Sube a un cajón o banco con una pierna a la vez; pierna y glúteo.
+Plie_Dumbbell_Squat|Sentadilla sumo con mancuerna|pierna||sentadilla sumo,plie|Postura ancha con una mancuerna al centro; aductores y glúteos.
+Dumbbell_Squat|Sentadilla con mancuernas|pierna||sentadilla mancuernas|Sentadilla con mancuernas a los lados; buena para empezar.
+Bodyweight_Squat|Sentadilla libre|pierna|Peso corporal|sentadilla peso corporal,air squat|Sentadilla sin peso; perfecta para calentar o practicar técnica.
+Box_Squat|Sentadilla al cajón|pierna||box squat|Siéntate en un cajón detrás de ti y levántate; control y fuerza desde abajo.
+Glute_Ham_Raise|Elevación glúteo-isquio|pierna||ghr,glute ham raise|En la máquina GHR, flexiona rodillas y cadera; isquiotibiales y glúteos.
+Freehand_Jump_Squat|Sentadilla con salto|pierna|Peso corporal|jump squat|Sentadilla explosiva con salto; potencia de pierna y cardio.
+# ---------------- GLÚTEO ----------------
+Barbell_Hip_Thrust|Hip thrust con barra|gluteo||empuje de cadera,hip thrust|Espalda alta en el banco, empuja la cadera hacia arriba con la barra; de los mejores para glúteo.
+Barbell_Glute_Bridge|Puente de glúteo con barra|gluteo||puente de gluteo,glute bridge|En el piso, sube la cadera con la barra sobre las caderas.
+Butt_Lift_Bridge|Puente de glúteo|gluteo|Peso corporal|puente,elevacion de cadera|Puente en el piso con peso corporal; activación y trabajo de glúteo.
+Single_Leg_Glute_Bridge|Puente de glúteo a una pierna|gluteo|Peso corporal|puente una pierna|Puente de glúteo con una pierna; más exigente y mejora el equilibrio.
+One-Legged_Cable_Kickback|Patada de glúteo en polea|gluteo||patada gluteo polea,cable kickback|Extiende la pierna hacia atrás con tobillera en polea baja.
+Glute_Kickback|Patada de glúteo en cuadrupedia|gluteo|Peso corporal|patada de burro,donkey kick|En cuatro apoyos, lleva la pierna hacia atrás y arriba.
+Pull_Through|Pull through en polea|gluteo||jalon entre piernas|Bisagra de cadera con polea entre las piernas; glúteos e isquios.
+Monster_Walk|Caminata monstruo con banda|gluteo|Banda elástica|monster walk,caminata lateral|Con banda en las piernas, camina lateral en media sentadilla; glúteo medio.
+Hip_Extension_with_Bands|Extensión de cadera con banda|gluteo|Banda elástica|patada con banda|Extensión de cadera con banda elástica; ideal para activar el glúteo.
+Reverse_Hyperextension|Hiperextensión inversa|gluteo||reverse hyper|Eleva las piernas con el torso apoyado; glúteos, isquios y lumbares.
+# ---------------- PANTORRILLA ----------------
+Standing_Calf_Raises|Elevación de talones de pie|pantorrilla||pantorrillas de pie,calf raise|Sube sobre las puntas de los pies; el básico para gemelos.
+Seated_Calf_Raise|Elevación de talones sentado|pantorrilla||pantorrillas sentado|Sentado, trabaja principalmente el sóleo.
+Calf_Press_On_The_Leg_Press_Machine|Elevación de talones en prensa|pantorrilla||pantorrilla en prensa|Usa la prensa de pierna para trabajar las pantorrillas con mucho peso.
+Standing_Dumbbell_Calf_Raise|Elevación de talones con mancuernas|pantorrilla||pantorrilla mancuernas|Elevaciones de talones de pie con mancuernas.
+Donkey_Calf_Raises|Elevación de talones tipo burro|pantorrilla||burro,donkey calf|Con el torso inclinado; gran estiramiento de los gemelos.
+Smith_Machine_Calf_Raise|Elevación de talones en Smith|pantorrilla||pantorrilla smith|Elevaciones de talones en máquina Smith con un escalón.
+Standing_Barbell_Calf_Raise|Elevación de talones con barra|pantorrilla||pantorrilla barra|Elevaciones de talones de pie con la barra a la espalda.
+Dumbbell_Seated_One-Leg_Calf_Raise|Elevación de talones sentado a una pierna|pantorrilla||pantorrilla una pierna|Sentado con una mancuerna sobre el muslo; trabaja cada pierna por separado.
+# ---------------- ABDOMEN ----------------
+Crunches|Abdominales (crunch)|abdomen||crunch,abdominales,abs|Sube los hombros del piso contrayendo el abdomen; movimiento corto y controlado.
+Sit-Up|Abdominales completos|abdomen||sit up,situp|Sube el torso completo hasta sentarte; abdomen y flexores de cadera.
+Reverse_Crunch|Crunch inverso|abdomen||abdomen bajo|Eleva la pelvis llevando las rodillas al pecho; abdomen bajo.
+Hanging_Leg_Raise|Elevación de piernas colgado|abdomen|Barra fija|elevacion de piernas,leg raise|Colgado de la barra, sube las piernas controlando; exigente para el abdomen.
+Flat_Bench_Lying_Leg_Raise|Elevación de piernas en banco|abdomen|Banco|piernas banco,leg raise banco|Acostado en un banco, sube y baja las piernas sin arquear la espalda.
+Plank|Plancha|abdomen|Peso corporal|plank,plancha isometrica|Mantén el cuerpo recto apoyado en antebrazos y puntas; core, hombros y glúteo.
+Side_Bridge|Plancha lateral|abdomen|Peso corporal|plancha de lado,side plank|Apoyado de lado sobre un antebrazo; oblicuos y estabilidad.
+Russian_Twist|Giro ruso|abdomen||russian twist,giros,oblicuos|Sentado con el torso inclinado, gira de lado a lado; oblicuos.
+Cable_Crunch|Crunch en polea|abdomen||abdominal polea,crunch de rodillas|De rodillas, flexiona el tronco hacia el piso con la cuerda en polea alta.
+Ab_Roller|Rueda abdominal|abdomen|Rueda|rueda,ab wheel|Rueda hacia adelante y regresa; muy exigente para el core.
+Ab_Crunch_Machine|Abdominales en máquina|abdomen||maquina abdominales|Crunch guiado en máquina para cargar peso al abdomen.
+Air_Bike|Bicicleta abdominal|abdomen|Peso corporal|bicicleta,bicycle crunch|Alterna codo y rodilla opuestos pedaleando en el aire.
+Mountain_Climbers|Escaladores|abdomen|Peso corporal|mountain climbers,escalador|En posición de plancha, lleva las rodillas al pecho alternando rápido; core y cardio.
+Standing_Cable_Wood_Chop|Leñador en polea|abdomen||wood chop,hachazo|Gira el torso llevando la polea en diagonal; oblicuos y core.
+Dead_Bug|Bicho muerto|abdomen|Peso corporal|dead bug|Acostado, alterna brazo y pierna opuestos sin despegar la zona lumbar; control del core.
+Pallof_Press|Press Pallof|abdomen||pallof,anti rotación|De pie, empuja la polea al frente resistiendo la rotación; core.
+Oblique_Crunches|Crunch oblicuo|abdomen||oblicuos|Crunch con giro hacia un lado; trabaja los oblicuos.
+Decline_Crunch|Crunch declinado|abdomen|Banco declinado|abdominal declinado|Crunch en banco declinado: más resistencia para el abdomen.
+Dumbbell_Side_Bend|Inclinación lateral con mancuerna|abdomen||side bend,flexión lateral|De pie, inclínate hacia un lado con una mancuerna; oblicuos.
+Knee_Hip_Raise_On_Parallel_Bars|Elevación de rodillas en paralelas|abdomen|Paralelas|silla romana,elevacion de rodillas|Apoyado en los antebrazos, sube las rodillas hacia el pecho.
+Jackknife_Sit-Up|Abdominal navaja|abdomen|Peso corporal|jackknife,v-up|Sube tronco y piernas a la vez formando una V; abdomen completo.
+# ---------------- CARDIO ----------------
+Running_Treadmill|Correr en caminadora|cardio|Caminadora|correr,trotar,treadmill,banda|Corre a ritmo constante o por intervalos; mejora tu resistencia.
+Walking_Treadmill|Caminar en caminadora|cardio|Caminadora|caminar,caminadora,banda|Caminata en caminadora, con o sin inclinación; cardio de bajo impacto.
+Jogging_Treadmill|Trote en caminadora|cardio|Caminadora|trote|Trote suave y sostenido para entrenar la base aeróbica.
+Bicycling_Stationary|Bicicleta estática|cardio|Bicicleta|spinning,bici estatica|Pedalea con resistencia ajustable; cardio de bajo impacto para piernas.
+Recumbent_Bike|Bicicleta reclinada|cardio|Bicicleta|bici reclinada|Bicicleta con respaldo; cómoda para sesiones largas.
+Elliptical_Trainer|Elíptica|cardio|Máquina|eliptica,cross trainer|Movimiento fluido sin impacto para cardio de cuerpo completo.
+Rowing_Stationary|Remo en ergómetro|cardio|Máquina|remo maquina,rower,ergometro|Cardio de cuerpo completo: empuja con las piernas y jala con la espalda.
+Rope_Jumping|Saltar la cuerda|cardio|Cuerda|cuerda,comba,saltar cuerda|Saltos continuos; cardio, coordinación y pantorrillas.
+Stairmaster|Escaladora|cardio|Máquina|stairmaster,escaleras,stair climber|Sube escalones sin fin; cardio exigente para piernas y glúteos.
+Box_Jump_Multiple_Response|Saltos al cajón|cardio|Cajón|box jump,saltos cajon|Salta a un cajón con aterrizaje suave; potencia y cardio.
+Battling_Ropes|Cuerdas de batalla|cardio|Cuerdas|battle ropes,cuerdas|Ondula las cuerdas pesadas con ambos brazos; cardio intenso para hombros y core.
+Star_Jump|Saltos de tijera|cardio|Peso corporal|jumping jacks,saltos de estrella|Abre y cierra brazos y piernas con salto; calentamiento y cardio.
+Bicycling|Ciclismo|cardio|Bicicleta|bici,bicicleta,ciclismo|Pedalea en exteriores; cardio de larga duración.
+# ================= v1.7: VARIACIONES =================
+# ---------------- PECHO (variaciones) ----------------
+Dumbbell_Bench_Press_with_Neutral_Grip|Press plano con mancuernas agarre neutro|pecho||press neutro,palmas enfrentadas|Press con las palmas mirándose: los codos quedan más pegados al cuerpo, con menos estrés en el hombro y más trabajo de tríceps.
+Hammer_Grip_Incline_DB_Bench_Press|Press inclinado con mancuernas agarre neutro|pecho||inclinado neutro,press inclinado martillo|Press en banco inclinado con las palmas enfrentadas; cómodo para el hombro y enfocado en el pecho superior.
+One_Arm_Dumbbell_Bench_Press|Press plano con mancuerna a una mano|pecho||press unilateral,una mano|Press con una sola mancuerna: el core evita que el torso gire y se corrigen diferencias entre un lado y otro.
+Decline_Dumbbell_Flyes|Aperturas declinadas con mancuernas|pecho||aperturas declinadas|Aperturas en banco declinado para la parte baja del pecho; mantén los codos ligeramente flexionados.
+One-Arm_Flat_Bench_Dumbbell_Flye|Apertura a una mano en banco plano|pecho||apertura unilateral|Apertura con una sola mancuerna para concentrar el trabajo en cada lado del pecho.
+Flat_Bench_Cable_Flyes|Aperturas en banco con poleas|pecho||aperturas en polea,cable fly banco|Aperturas tumbado entre dos poleas bajas: la tensión es constante durante todo el recorrido.
+Incline_Cable_Flye|Aperturas inclinadas en polea|pecho||aperturas inclinadas polea|Aperturas en banco inclinado con poleas; la tensión continua castiga el pecho superior.
+Incline_Cable_Chest_Press|Press inclinado en polea|pecho||press inclinado polea|Press en banco inclinado con poleas: tensión constante y recorrido natural para el pecho superior.
+Standing_Cable_Chest_Press|Press de pecho de pie en polea|pecho||press polea de pie|Empuje al frente de pie con poleas a la altura del pecho; el core estabiliza todo el cuerpo.
+Single-Arm_Cable_Crossover|Cruce de poleas a una mano|pecho||cruce unilateral|Cruce con un brazo a la vez para pasar la línea media y sentir mejor la contracción.
+Smith_Machine_Incline_Bench_Press|Press inclinado en Smith|pecho||inclinado smith|Press inclinado en Smith: trayectoria guiada para empujar fuerte sobre el pecho superior.
+Smith_Machine_Decline_Press|Press declinado en Smith|pecho||declinado smith|Press declinado en la máquina Smith, con la barra guiada, para la zona baja del pecho.
+Leverage_Incline_Chest_Press|Press inclinado en máquina|pecho||inclinado maquina|Empuje guiado hacia arriba y al frente: pecho superior sin preocuparte por el equilibrio.
+Leverage_Decline_Chest_Press|Press declinado en máquina|pecho||declinado maquina|Empuje guiado hacia abajo y al frente; carga la parte baja del pecho con seguridad.
+Svend_Press|Press Svend con discos|pecho|Disco|svend,apretar discos|De pie, aprieta dos discos entre las palmas y empújalos al frente: contracción continua del pecho con poco peso.
+Bench_Press_-_With_Bands|Press de banca con bandas|pecho||banca con banda,press bandas|Press de banca con resistencia elástica: la carga crece al extender los codos y entrena el bloqueo final.
+Push-Up_Wide|Lagartijas abiertas|pecho||lagartijas anchas,flexiones anchas|Manos más separadas que los hombros para acentuar el pecho y reducir el trabajo del tríceps.
+Plyo_Push-up|Lagartijas con palmada|pecho||lagartijas explosivas,flexiones pliométricas|Empuje explosivo que despega las manos del piso; potencia para pecho, hombros y tríceps.
+Single-Arm_Push-Up|Lagartijas a una mano|pecho||flexion a una mano|Variante avanzada: el core y el pecho resisten la rotación mientras empujas con un solo brazo.
+Suspended_Push-Up|Lagartijas en suspensión|pecho|TRX / correas|lagartijas trx,flexiones en anillas,lagartijas anillas|Con las manos en correas o anillas inestables, pecho, hombros y core trabajan más para estabilizar.
+Clock_Push-Up|Lagartijas reloj|pecho||lagartijas en circulo|Entre repeticiones mueves las manos como las agujas de un reloj; trabajas el pecho desde distintos ángulos.
+Push-Ups_With_Feet_On_An_Exercise_Ball|Lagartijas con pies sobre balón|pecho||lagartijas con balon|Pies sobre un balón inestable: más carga en pecho y hombros y mucho trabajo de core.
+Straight-Arm_Dumbbell_Pullover|Pullover con brazos rectos|pecho||pullover brazos rectos|Con los brazos casi rectos llevas la mancuerna detrás de la cabeza; estira el pecho y los dorsales.
+One-Arm_Kettlebell_Floor_Press|Press de suelo con pesa rusa a una mano|pecho||floor press kettlebell,press en el suelo|Tumbado en el suelo empujas una pesa rusa; el piso limita el recorrido y protege el hombro.
+Wide-Grip_Decline_Barbell_Bench_Press|Press declinado agarre ancho|pecho||declinado ancho|Press declinado con agarre abierto para cargar la parte baja y externa del pecho.
+Medicine_Ball_Chest_Pass|Pase de pecho con balón medicinal|pecho||pase de pecho,lanzamiento de pecho|Lanza el balón con fuerza desde el pecho; desarrolla potencia de empuje.
+# ---------------- ESPALDA (variaciones) ----------------
+Band_Assisted_Pull-Up|Dominadas asistidas con banda|espalda|Barra fija|dominadas con banda,pull up asistido|Una banda elástica te ayuda a subir: ideal para aprender la dominada o sumar repeticiones limpias.
+Weighted_Pull_Ups|Dominadas con lastre|espalda|Barra fija|dominadas lastradas,dominadas con peso|Dominadas con un disco o chaleco extra para seguir progresando cuando las normales ya te sobran.
+V-Bar_Pullup|Dominadas agarre neutro|espalda|Barra fija|dominadas neutras,dominadas triangulo|Dominadas con asas de agarre neutro (palmas enfrentadas); más amables con codos y hombros.
+Mixed_Grip_Chin|Dominadas agarre mixto|espalda|Barra fija|dominada mixta|Una mano en pronación y otra en supinación; alterna el lado en cada serie.
+Muscle_Up|Muscle-up|espalda|Anillas|muscle up,salida en anillas|Dominada explosiva seguida de un fondo sobre las anillas (o la barra): avanzado y muy exigente para dorsales, pecho y tríceps.
+Scapular_Pull-Up|Dominada escapular|espalda|Barra fija|retraccion escapular,scap pull up|Colgado, subes unos centímetros moviendo solo los omóplatos; activa la espalda y prepara para las dominadas.
+Full_Range-Of-Motion_Lat_Pulldown|Jalón con rango completo|espalda||jalon rango completo|Jalón con estiramiento total arriba y contracción fuerte abajo.
+One_Arm_Lat_Pulldown|Jalón a una mano|espalda||jalon unilateral|Jalón con un brazo para igualar fuerza entre lados y llevar el codo más abajo.
+Rope_Straight-Arm_Pulldown|Jalón con cuerda y brazos rectos|espalda||jalon cuerda brazos rectos|Con los brazos casi extendidos, lleva la cuerda hacia los muslos; aísla los dorsales.
+Kneeling_High_Pulley_Row|Remo en polea alta de rodillas|espalda||remo polea alta|De rodillas frente a una polea alta, jala hacia el pecho con los codos pegados; trabaja dorsales y espalda alta.
+Kneeling_Single-Arm_High_Pulley_Row|Remo a una mano en polea alta|espalda||remo polea alta unilateral|Remo de rodillas con un solo brazo en polea alta; mucho rango y contracción del dorsal.
+Elevated_Cable_Rows|Remo en polea elevada|espalda||remo polea elevada|Remo con la polea más alta que el pecho para cargar la parte alta de la espalda.
+Bent_Over_Two-Arm_Long_Bar_Row|Remo landmine a dos manos|espalda|Barra|remo barra larga,remo landmine,remo con barra anclada|Con una barra anclada en una esquina o landmine, rema con ambas manos: recorrido cómodo y fuerte trabajo de espalda media.
+Bent_Over_One-Arm_Long_Bar_Row|Remo landmine a una mano|espalda|Barra|remo landmine unilateral|Remo con barra anclada y una sola mano; permite cargar más peso y concentrarte en un lado.
+Bent_Over_Two-Dumbbell_Row_With_Palms_In|Remo con mancuernas agarre neutro|espalda||remo palmas enfrentadas,remo neutro|Remo inclinado con dos mancuernas y las palmas enfrentadas; codos cerca del cuerpo para dorsales y espalda media.
+Dumbbell_Incline_Row|Remo con mancuernas en banco inclinado|espalda||remo pecho apoyado,remo banco inclinado|Boca abajo sobre un banco inclinado, rema con mancuernas; la espalda baja descansa y trabajas solo la espalda alta.
+Lying_T-Bar_Row|Remo en T tumbado|espalda||remo t pecho apoyado|Remo en barra T con el pecho apoyado: elimina el balanceo y aísla la espalda media.
+Smith_Machine_Bent_Over_Row|Remo con barra en Smith|espalda||remo smith|Remo inclinado en la máquina Smith: la barra va guiada y puedes concentrarte en jalar.
+Leverage_High_Row|Remo alto en máquina|espalda||remo alto maquina|Jala hacia ti con los codos altos en máquina; trabaja la espalda alta y los deltoides posteriores.
+Inverted_Row_with_Straps|Remo invertido en suspensión|espalda|TRX / correas|remo trx,remo en anillas|Remo con el cuerpo colgando de correas; cuanto más horizontal, más difícil.
+One-Arm_Kettlebell_Row|Remo con pesa rusa a una mano|espalda||remo kettlebell,remo pesa rusa|Remo inclinado con una pesa rusa; la espalda y el core trabajan juntos.
+Alternating_Renegade_Row|Remo renegado|espalda||renegade row|En posición de plancha sobre dos pesas, remas alternando brazos sin girar la cadera; espalda y core a la vez.
+Bent-Arm_Barbell_Pullover|Pullover con barra|espalda||pullover barra|Tumbado en banco, baja la barra detrás de la cabeza con codos semiflexionados y regresa sobre el pecho; dorsales y pecho.
+Deficit_Deadlift|Peso muerto con déficit|espalda||peso muerto deficit|Parado sobre una plataforma baja: más recorrido y más trabajo de piernas y espalda baja en el arranque.
+Stiff_Leg_Barbell_Good_Morning|Buenos días con piernas rígidas|espalda||buenos dias piernas rigidas|Bisagra de cadera con la barra en la espalda y las rodillas casi extendidas; estira isquios y fortalece la espalda baja.
+Seated_Good_Mornings|Buenos días sentado|espalda||buenos dias sentado|Desde sentado, inclina el torso al frente con la barra en la espalda: aísla la espalda baja sin carga en las piernas.
+Hyperextensions_With_No_Hyperextension_Bench|Extensiones lumbares en banco plano|espalda||hiperextension sin banco romano,hiperextension en banco plano|Con un compañero que te sujete las piernas, deja el torso colgando del borde de un banco plano y súbelo hasta alinear el cuerpo; espalda baja y glúteos.
+Weighted_Ball_Hyperextension|Hiperextensión sobre balón con peso|espalda||hiperextension balon|Boca abajo sobre un balón suizo y con un disco bajo la barbilla, sube el torso hasta alinear el cuerpo; espalda baja y glúteos.
+Incline_Bench_Pull|Remo boca abajo en banco inclinado|espalda|Mancuernas|remo prono,remo pecho apoyado mancuernas|Boca abajo en un banco inclinado a 30°, jala las mancuernas hacia las costillas con los codos abiertos: espalda media y deltoides posterior sin cargar la zona lumbar.
+# ---------------- HOMBRO (variaciones) ----------------
+Seated_Dumbbell_Press|Press sentado con mancuernas|hombro||press hombro sentado,press hombro banco|Press vertical sentado con respaldo: más estable que de pie, ideal para cargar fuerte los deltoides.
+Standing_Dumbbell_Press|Press de pie con mancuernas|hombro||press mancuernas de pie|De pie, empuja las mancuernas sobre la cabeza; el core y las piernas estabilizan el cuerpo.
+Dumbbell_One-Arm_Shoulder_Press|Press de hombro a una mano|hombro||press unilateral hombro|Una mancuerna a la vez: corriges diferencias entre lados y el core trabaja para no inclinarte.
+Standing_Palms-In_Dumbbell_Press|Press con mancuernas agarre neutro|hombro||press neutro hombro,palmas enfrentadas|Palmas enfrentadas durante todo el press; postura cómoda para el hombro.
+Standing_Alternating_Dumbbell_Press|Press alterno con mancuernas|hombro||press alterno|Presionas un brazo mientras el otro baja; mantén el torso quieto.
+Push_Press|Push press|hombro||press con impulso,empuje con piernas|Press sobre la cabeza con un pequeño impulso de piernas para mover más peso.
+Cable_Shoulder_Press|Press de hombro en polea|hombro||press hombro polea|Press sobre la cabeza con poleas: tensión constante y recorrido natural.
+Seated_Cable_Shoulder_Press|Press de hombro sentado en polea|hombro||press hombro polea sentado|Press sentado con poleas; estable y con tensión continua en los deltoides.
+Shoulder_Press_-_With_Bands|Press de hombro con banda|hombro||press hombro banda|Press vertical con banda elástica; ideal en casa o para calentar.
+Cuban_Press|Press cubano|hombro||cuban press|Rotación externa y press en un solo movimiento con poco peso; fortalece el manguito y el deltoides.
+Kettlebell_Arnold_Press|Press Arnold con pesa rusa|hombro||arnold kettlebell|Press con giro de muñeca usando pesas rusas; trabaja los tres haces del deltoides.
+Kettlebell_Seated_Press|Press sentado con pesa rusa|hombro||press kettlebell sentado|Press sobre la cabeza sentado con pesa rusa; estable y con la carga descentrada que exige control.
+Handstand_Push-Ups|Flexiones en parada de manos|hombro|Pared|parada de manos,hspu,flexiones verticales|Con los pies en la pared y el cuerpo invertido, baja la cabeza al suelo y empuja: hombros fuertísimos.
+Lateral_Raise_-_With_Bands|Elevaciones laterales con banda|hombro||laterales con banda|Elevaciones laterales con banda: la tensión aumenta al subir.
+Cable_Seated_Lateral_Raise|Elevaciones laterales sentado en polea|hombro||laterales polea sentado|Sentado, sube el brazo hacia el lado con polea baja; sin impulso y con tensión constante.
+One-Arm_Side_Laterals|Elevación lateral a una mano|hombro||lateral unilateral|Una mancuerna a la vez, con la otra mano agarrada a un apoyo; mejor control del movimiento.
+Lying_One-Arm_Lateral_Raise|Elevación lateral tumbado de lado|hombro||lateral tumbado|Tumbado de lado, sube la mancuerna hasta la vertical: más tensión al inicio del recorrido.
+One-Arm_Incline_Lateral_Raise|Elevación lateral inclinada a una mano|hombro||lateral inclinado|Apoyado de lado en un banco inclinado, eleva la mancuerna; aísla el deltoides lateral.
+Alternating_Deltoid_Raise|Elevación alterna frontal y lateral|hombro||frontal y lateral alterno|Una repetición al frente y la siguiente al lado, alternando; trabaja dos haces del hombro.
+Front_Plate_Raise|Elevación frontal con disco|hombro|Disco|frontal disco|Sostén un disco con ambas manos y súbelo al frente hasta la altura de los ojos.
+Dumbbell_Scaption|Elevación en plano escapular|hombro||scaption,elevacion en Y|Sube los brazos 30° hacia delante con los pulgares arriba; estabiliza la escápula y cuida el hombro.
+Bent_Over_Dumbbell_Rear_Delt_Raise_With_Head_On_Bench|Pájaros con la frente apoyada|hombro||pajaros apoyado,pajaros cabeza en banco|Inclinado con la frente en un banco, abre los brazos: aísla el deltoides posterior sin cargar la espalda.
+Lying_Rear_Delt_Raise|Pájaros tumbado boca abajo|hombro||pajaros tumbado|Tumbado boca abajo en banco inclinado, abre los brazos con mancuernas; deltoides posterior aislado.
+Back_Flyes_-_With_Bands|Pájaros con banda|hombro||pajaros banda|Abre los brazos contra una banda elástica; deltoides posteriores y espalda alta.
+Reverse_Flyes_With_External_Rotation|Pájaros con rotación externa|hombro||pajaros con rotacion|Abres los brazos y rotas el antebrazo hacia arriba al final; trabaja deltoides posterior y manguito.
+External_Rotation|Rotación externa con mancuerna|hombro||rotacion externa manguito|Tumbado de lado, gira el antebrazo hacia arriba con el codo pegado: fortalece el manguito rotador.
+External_Rotation_with_Band|Rotación externa con banda|hombro||rotacion externa banda|Con el codo pegado al costado, abre el antebrazo contra una banda; prevención de lesiones de hombro.
+Internal_Rotation_with_Band|Rotación interna con banda|hombro||rotacion interna banda|Con el codo pegado, lleva el antebrazo hacia el abdomen contra una banda; equilibra el manguito rotador.
+Kettlebell_Turkish_Get-Up_Squat_style|Levantamiento turco|hombro||turkish get up,get up|Del suelo a de pie con una pesa rusa sostenida en alto; fuerza, estabilidad y coordinación de todo el cuerpo.
+Smith_Machine_Upright_Row|Remo al mentón en Smith|hombro||remo al menton smith|Sube la barra hasta el pecho alto con los codos por encima de las manos en la máquina Smith.
+Standing_Dumbbell_Upright_Row|Remo al mentón con mancuernas|hombro||remo al menton mancuernas|Sube las mancuernas pegadas al cuerpo hasta el pecho alto; deltoides y trapecio.
+Upright_Cable_Row|Remo al mentón en polea|hombro||remo al menton polea|Remo al mentón con polea baja: tensión constante y recorrido controlado.
+Cable_Shrugs|Encogimientos en polea|hombro||shrugs polea|Con polea baja, sube los hombros hacia las orejas y baja controlado; trapecio con tensión continua.
+Leverage_Shrug|Encogimientos en máquina|hombro||shrugs maquina|Encogimientos guiados en máquina; cómodo para cargar mucho el trapecio.
+Kettlebell_Sumo_High_Pull|Tirón alto sumo con pesa rusa|hombro||sumo high pull|Desde postura sumo, sube la pesa al mentón con los codos arriba; piernas, trapecio y hombros.
+Landmine_Linear_Jammer|Press landmine|hombro|Barra|landmine press,jammer|Con una barra anclada en una esquina, empuja hacia arriba y al frente; hombros y pecho con poca carga sobre las articulaciones.
+# ---------------- BICEPS (variaciones) ----------------
+Alternate_Hammer_Curl|Curl martillo alterno|biceps||martillo alterno|Curl martillo subiendo un brazo y luego el otro; braquial y antebrazo.
+Cross_Body_Hammer_Curl|Curl martillo cruzado|biceps||martillo cruzado|Sube la mancuerna cruzando el pecho hacia el hombro contrario; carga el braquial.
+Incline_Hammer_Curls|Curl martillo inclinado|biceps||martillo en banco inclinado|Curl martillo en banco inclinado: mayor estiramiento inicial del brazo.
+Alternate_Incline_Dumbbell_Curl|Curl inclinado alterno|biceps||inclinado alterno|Curl en banco inclinado alternando brazos para estirar bien el bíceps.
+Seated_Dumbbell_Curl|Curl sentado con mancuernas|biceps||curl sentado|Sentado y con la espalda apoyada, sube las mancuernas sin balanceo; bíceps más aislado.
+Standing_Concentration_Curl|Curl concentrado de pie|biceps||concentrado de pie|Inclinado hacia delante, con el brazo colgando, sube la mancuerna sin mover el codo.
+Standing_One-Arm_Cable_Curl|Curl a una mano en polea|biceps||curl polea unilateral|Curl de pie con un brazo en polea baja: tensión constante.
+Cable_Preacher_Curl|Curl predicador en polea|biceps||predicador polea|Curl con el brazo apoyado en el banco predicador y polea; el bíceps no descansa en ningún punto.
+One_Arm_Dumbbell_Preacher_Curl|Curl predicador a una mano|biceps||predicador unilateral|Apoya un brazo en el banco predicador y sube la mancuerna sin balanceo.
+Two-Arm_Dumbbell_Preacher_Curl|Curl predicador con mancuernas|biceps||predicador mancuernas|Curl predicador con dos mancuernas a la vez; bíceps aislado y sin trampa.
+Preacher_Hammer_Dumbbell_Curl|Curl martillo en predicador|biceps||martillo predicador|Curl con las palmas enfrentadas sobre el banco predicador; braquial y antebrazo.
+Close-Grip_EZ_Bar_Curl|Curl con barra Z agarre cerrado|biceps|Barra Z|curl barra z cerrado|Agarre cerrado en la barra Z: acentúa la cabeza externa del bíceps.
+Close-Grip_Standing_Barbell_Curl|Curl con barra agarre cerrado|biceps||curl barra cerrado|Agarre estrecho con barra recta para enfocar la parte externa del bíceps.
+Wide-Grip_Standing_Barbell_Curl|Curl con barra agarre ancho|biceps||curl barra ancho|Agarre más abierto que los hombros para enfatizar la parte interna del bíceps.
+Drag_Curl|Curl arrastrado|biceps||curl drag|Sube la barra pegada al torso llevando los codos atrás; bíceps con menos ayuda del hombro.
+Lying_Cable_Curl|Curl tumbado en polea|biceps||curl tumbado polea|Tumbado frente a una polea baja, flexiona los codos para curlear; tensión constante.
+Overhead_Cable_Curl|Curl en polea alta doble|biceps||doble biceps polea|Con los brazos abiertos en cruz y poleas altas, flexiona los codos hacia la cabeza.
+Reverse_Cable_Curl|Curl inverso en polea|biceps||curl inverso polea|Curl con agarre prono en polea baja; antebrazo y braquial.
+Standing_Dumbbell_Reverse_Curl|Curl inverso con mancuernas|biceps||curl inverso mancuernas|Curl con las palmas hacia abajo; braquiorradial y antebrazo.
+Reverse_Barbell_Preacher_Curls|Curl inverso en predicador|biceps|Barra Z|inverso predicador|Curl con agarre prono sobre el banco predicador; antebrazo fuerte y bíceps.
+Flexor_Incline_Dumbbell_Curls|Curl inclinado con muñecas atrás|biceps||curl flexor|Curl inclinado manteniendo las muñecas hacia atrás para aislar el bíceps y cuidar las muñecas.
+Dumbbell_Prone_Incline_Curl|Curl boca abajo en banco inclinado|biceps||curl prono inclinado,curl araña mancuernas|Boca abajo sobre un banco inclinado, los brazos cuelgan y curleas: sin balanceo posible.
+Seated_Dumbbell_Palms-Up_Wrist_Curl|Curl de muñeca sentado con mancuernas|biceps||curl de muñeca mancuernas|Antebrazos apoyados en los muslos y palmas arriba, flexiona las muñecas; antebrazos más fuertes.
+Seated_Dumbbell_Palms-Down_Wrist_Curl|Extensión de muñeca sentado con mancuernas|biceps||extension de muñeca mancuernas|Palmas abajo, sube las muñecas contra la mancuerna; extensores del antebrazo.
+Cable_Wrist_Curl|Curl de muñeca en polea|biceps||muñeca polea|Curl de muñeca con polea baja; tensión constante en los flexores del antebrazo.
+Wrist_Roller|Rodillo de muñeca|biceps|Rodillo|rodillo antebrazo,wrist roller|Enrolla una cuerda con un peso atado a un palo; antebrazos en llamas y agarre de hierro.
+Plate_Pinch|Pellizco con discos|biceps|Disco|pinza,agarre con discos|Sostén dos discos lisos con los dedos y el pulgar; trabaja la fuerza de agarre.
+# ---------------- TRICEPS (variaciones) ----------------
+Decline_EZ_Bar_Triceps_Extension|Press francés declinado con barra Z|triceps|Barra Z|skull crusher declinado|Press francés en banco declinado; el ángulo cambia la tensión sobre la cabeza larga del tríceps.
+Decline_Dumbbell_Triceps_Extension|Press francés declinado con mancuernas|triceps||skull crusher mancuernas declinado|Extensión de codos tumbado y declinado con mancuernas: más libertad de muñeca.
+Lying_Dumbbell_Tricep_Extension|Press francés con mancuernas|triceps||skull crusher mancuernas,rompecraneos|Tumbado en banco, flexiona y extiende los codos con mancuernas; buen estiramiento del tríceps.
+Incline_Barbell_Triceps_Extension|Press francés inclinado con barra|triceps||skull crusher inclinado|Press francés en banco inclinado: más estiramiento de la cabeza larga.
+Cable_Lying_Triceps_Extension|Press francés en polea|triceps||skull crusher polea|Press francés tumbado con polea: tensión constante, sin descanso al final.
+Cable_Incline_Triceps_Extension|Extensión de tríceps en polea desde banco inclinado|triceps||extension polea banco inclinado|Tumbado en banco inclinado, de espaldas a una polea alta, extiende los codos con la barra sobre la cabeza; gran estiramiento del tríceps.
+Kneeling_Cable_Triceps_Extension|Extensión de tríceps de rodillas en polea|triceps||extension rodillas polea|De rodillas frente a la polea alta, extiende los codos hacia abajo; el core se mantiene firme.
+Standing_Low-Pulley_One-Arm_Triceps_Extension|Extensión a una mano en polea baja|triceps||extension unilateral polea baja|Brazo por encima de la cabeza, extiende el codo con polea baja; tensión constante.
+Triceps_Pushdown_-_V-Bar_Attachment|Extensión de tríceps con barra V|triceps||pushdown barra v|Empuja la barra en V hacia abajo con los codos pegados; agarre cómodo para las muñecas.
+Close-Grip_Dumbbell_Press|Press cerrado con mancuernas|triceps||press cerrado mancuernas|Press con las mancuernas juntas; el tríceps hace gran parte del trabajo.
+Close-Grip_EZ-Bar_Press|Press cerrado con barra Z|triceps|Barra Z|press cerrado barra z|Press de banca con barra Z y agarre estrecho; más cómodo para las muñecas.
+Smith_Machine_Close-Grip_Bench_Press|Press cerrado en Smith|triceps||press cerrado smith|Press de agarre estrecho en la máquina Smith: trayectoria guiada para el tríceps.
+JM_Press|JM press|triceps||jm,jm press|Mezcla de press cerrado y extensión francesa; cargas pesadas para tríceps.
+Floor_Press|Press de suelo con barra|triceps||floor press barra,press en el suelo|Press de banca tumbado en el suelo: el recorrido corto trabaja el bloqueo y el tríceps.
+Dumbbell_Floor_Press|Press de suelo con mancuernas|triceps||floor press mancuernas|Press tumbado en el suelo con mancuernas; protege el hombro y carga el tríceps.
+Dumbbell_One-Arm_Triceps_Extension|Extensión sobre la cabeza a una mano|triceps||extension unilateral mancuerna|Extiende un codo sobre la cabeza con una mancuerna; gran estiramiento del tríceps.
+Standing_Overhead_Barbell_Triceps_Extension|Extensión sobre la cabeza con barra|triceps||press frances de pie|De pie y con la barra tras la cabeza, extiende los codos; cabeza larga del tríceps.
+Band_Skull_Crusher|Press francés con banda|triceps||press frances banda|Press francés con banda elástica; ligero y perfecto para casa.
+Ring_Dips|Fondos en anillas|triceps|Anillas|fondos anillas|Fondos en anillas inestables: más trabajo de estabilizadores, pecho y tríceps.
+Weighted_Bench_Dip|Fondos en banco con lastre|triceps||fondos banco con peso|Fondos en banco con un disco sobre las piernas para aumentar la carga.
+Body_Tricep_Press|Press de tríceps con barra baja|triceps|Barra|press de triceps cuerpo,skull crusher de pie|Con las manos en una barra a la altura del pecho, flexiona los codos acercándote a la barra y extiende.
+Close-Grip_Push-Up_off_of_a_Dumbbell|Lagartijas cerradas sobre mancuerna|triceps||lagartijas sobre mancuerna|Manos juntas sobre una mancuerna y lagartijas; tríceps y pecho interno.
+Incline_Push-Up_Close-Grip|Lagartijas inclinadas agarre cerrado|triceps||lagartijas cerradas inclinadas|Manos juntas sobre un banco y lagartijas: tríceps con menos carga que el suelo.
+Tate_Press|Press Tate|triceps||tate,press tate|Tumbado, baja las mancuernas hacia el pecho con los codos hacia fuera y empuja; tríceps con enfoque único.
+# ---------------- PIERNA (variaciones) ----------------
+Barbell_Lunge|Desplante con barra|pierna||zancada con barra,lunge barra|Desplante con la barra sobre la espalda: baja con la rodilla de atrás casi al piso y sube empujando con la pierna delantera.
+Bodyweight_Walking_Lunge|Desplantes caminando sin peso|pierna||zancadas caminando,lunge caminando|Avanza alternando piernas sin carga; buen calentamiento y trabajo de piernas y glúteos en cualquier lugar.
+Barbell_Side_Split_Squat|Sentadilla lateral con barra|pierna||desplante lateral,sentadilla lateral|Con una zancada amplia hacia un lado, flexiona una pierna y mantén la otra recta; trabaja aductores, cuádriceps y glúteo.
+Barbell_Step_Ups|Subidas al cajón con barra|pierna||step up barra|Con la barra en la espalda, sube a un cajón con una pierna y baja controlado; cuádriceps y glúteos.
+Suspended_Split_Squat|Sentadilla búlgara en suspensión|pierna|TRX / correas|bulgara trx,bulgara con correas|Con el pie trasero en una correa suspendida, baja con la pierna delantera; más inestable y exigente que la búlgara en banco.
+Smith_Single-Leg_Split_Squat|Sentadilla búlgara en Smith|pierna|Smith|bulgara smith,sentadilla dividida smith|Con el pie trasero en un banco y la barra de la Smith en la espalda, baja con la pierna delantera; carga estable y guiada.
+Barbell_Squat_To_A_Bench|Sentadilla al banco con barra|pierna||sentadilla a banco,box squat|Sentadilla tocando un banco detrás: te enseña a sentarte atrás y marca la profundidad.
+Dumbbell_Squat_To_A_Bench|Sentadilla al banco con mancuernas|pierna||sentadilla banco mancuernas|Baja con mancuernas hasta tocar el banco y sube; ideal para controlar la profundidad.
+Overhead_Squat|Sentadilla overhead|pierna||sentadilla con barra arriba,overhead squat|Sentadilla con la barra sostenida sobre la cabeza; exige movilidad, estabilidad de hombros y core.
+Zercher_Squats|Sentadilla Zercher|pierna||zercher|Con la barra en el pliegue de los codos, baja en sentadilla: mucho trabajo de cuádriceps, glúteos y core.
+Wide_Stance_Barbell_Squat|Sentadilla con postura amplia|pierna||sentadilla sumo barra,sentadilla ancha|Sentadilla con los pies bien abiertos; más trabajo de glúteos y aductores.
+Narrow_Stance_Squats|Sentadilla con postura cerrada|pierna||sentadilla estrecha|Pies más juntos de lo habitual: enfatiza los cuádriceps.
+Narrow_Stance_Leg_Press|Prensa con pies juntos|pierna||prensa estrecha|Prensa con los pies juntos y bajos en la plataforma; carga los cuádriceps.
+Barbell_Hack_Squat|Sentadilla hack con barra|pierna||hack barra,hack squat barra|Con la barra detrás de las piernas y agarrada con los brazos extendidos, baja en sentadilla; cuádriceps.
+Single-Leg_Leg_Extension|Extensión de cuádriceps a una pierna|pierna||extension unilateral|Extensión en máquina con una sola pierna para corregir diferencias entre lados.
+Weighted_Sissy_Squat|Sentadilla sissy|pierna||sissy squat|Sobre las puntas, inclina el cuerpo hacia atrás mientras las rodillas avanzan; aislamiento brutal de cuádriceps (avanzado).
+Kettlebell_Pistol_Squat|Sentadilla pistol con pesa rusa|pierna||pistol squat kettlebell,sentadilla a una pierna|Sentadilla a una pierna con una pesa rusa de contrapeso al frente; fuerza, equilibrio y movilidad.
+Jefferson_Squats|Sentadilla Jefferson|pierna||jefferson|Con la barra entre las piernas, un pie delante y otro detrás, sube y baja en sentadilla asimétrica.
+Front_Squats_With_Two_Kettlebells|Sentadilla frontal con dos pesas rusas|pierna||sentadilla frontal kettlebells|Con una pesa rusa en cada hombro, baja en sentadilla frontal; torso erguido y mucho core.
+Squats_-_With_Bands|Sentadilla con banda|pierna||sentadilla banda elastica|Sentadilla con banda elástica bajo los pies: la resistencia aumenta al subir.
+Weighted_Jump_Squat|Sentadilla con salto y barra|pierna||salto con barra,jump squat barra|Sentadilla con salto explosivo sosteniendo una barra ligera; potencia de piernas.
+Cable_Deadlifts|Peso muerto en polea|pierna||peso muerto polea|Peso muerto con las poleas bajas: tensión constante en piernas y espalda baja.
+Leverage_Deadlift|Peso muerto en máquina|pierna||peso muerto maquina|Peso muerto guiado en máquina; práctico para aprender el patrón de bisagra con control.
+Band_Good_Morning|Buenos días con banda|pierna||buenos dias banda|Con una banda sobre los hombros y pisada con los pies, inclina el torso con la espalda recta; isquios y glúteos.
+Romanian_Deadlift_from_Deficit|Peso muerto rumano con déficit|pierna||rumano con deficit|Peso muerto rumano parado sobre una plataforma: mayor recorrido y estiramiento de isquios.
+Smith_Machine_Stiff-Legged_Deadlift|Peso muerto rígido en Smith|pierna|Smith|rumano smith|Peso muerto con las piernas casi extendidas en la máquina Smith; isquios y glúteos con la barra guiada.
+Kettlebell_One-Legged_Deadlift|Peso muerto a una pierna con pesa rusa|pierna||peso muerto unilateral,rumano a una pierna|Bisagra sobre una pierna con una pesa en la mano contraria; equilibrio, isquios y glúteos.
+Ball_Leg_Curl|Curl femoral con balón|pierna||curl femoral balon|Tumbado con los talones sobre un balón, elevas la cadera y lo acercas con las piernas; isquios y core.
+Floor_Glute-Ham_Raise|Curl nórdico|pierna||nordic curl,curl nordico|De rodillas y con los pies sujetos, déjate caer hacia delante controlando con los isquios; muy exigente.
+Platform_Hamstring_Slides|Deslizamientos de isquios|pierna||hamstring slides,deslizamiento de talon|Tumbado con una toalla bajo el talón, desliza el pie acercándolo al glúteo; isquios con poco equipo.
+Lunge_Pass_Through|Desplante con paso de pesa rusa|pierna||lunge con kettlebell|Al hacer el desplante, pasa la pesa rusa de una mano a otra bajo la pierna; coordinación y piernas.
+Cable_Hip_Adduction|Aducción de cadera en polea|pierna||aduccion polea|Con tobillera en polea baja, lleva la pierna hacia dentro cruzando la otra; aductores.
+Band_Hip_Adductions|Aducción de cadera con banda|pierna||aduccion banda|Con una banda en el tobillo, junta la pierna hacia la otra; trabaja aductores en casa.
+Hip_Flexion_with_Band|Elevación de rodilla con banda|pierna||flexion de cadera banda|Con una banda en el tobillo, sube la rodilla hasta 90°; trabaja flexores de cadera y cuádriceps.
+Bench_Jump|Salto al banco|pierna||salto a cajon,salto al banco|Desde parado frente a un banco, salta a la vez con ambos pies hacia arriba; potencia de piernas.
+Split_Jump|Saltos en zancada|pierna||salto en tijera,split jump|Desde posición de zancada, salta alternando piernas en el aire; potencia y coordinación.
+Standing_Long_Jump|Salto de longitud|pierna||salto largo|Con un buen impulso de brazos, salta lo más lejos posible y amortigua la caída; potencia horizontal.
+Sled_Push|Empuje de trineo|pierna|Trineo|sled push,empujar trineo|Empuja un trineo cargado a toda velocidad: piernas, glúteos y cardio en uno.
+# ---------------- GLUTEO / PANTORRILLA (variaciones) ----------------
+Hip_Lift_with_Band|Puente de glúteo con banda|gluteo||hip thrust con banda,puente con banda|Tumbado con una banda tirando hacia abajo, eleva la cadera y aprieta los glúteos arriba.
+Physioball_Hip_Bridge|Puente de glúteo con balón|gluteo||puente balon,hip bridge balon|Con la espalda alta sobre un balón, eleva la cadera para alinear el cuerpo; glúteos e isquios con el balón inestable.
+Step-up_with_Knee_Raise|Subida al cajón con rodilla arriba|gluteo||step up con rodilla|Sube a un cajón y levanta la rodilla contraria al final; glúteos y equilibrio.
+One-Arm_Kettlebell_Swings|Swing con pesa rusa a una mano|gluteo||swing kettlebell,kettlebell swing|Impulsa la pesa rusa con la cadera hasta el pecho y déjala volver; glúteos, isquios y cardio.
+Leg_Lift|Patada trasera de pie|gluteo||patada de gluteo de pie,elevacion de pierna atras|De pie y apoyado en algo estable, lleva una pierna atrás y arriba apretando el glúteo.
+Flutter_Kicks|Elevación de piernas boca abajo|gluteo|Banco|patada de gluteo en banco,flutter kicks|Boca abajo con la cadera en el borde de un banco, sube las piernas rectas apretando glúteos e isquios.
+Kneeling_Squat|Sentadilla de rodillas|gluteo|Barra|sentadilla de rodillas,kneeling squat|De rodillas con la barra en la espalda, siéntate sobre los talones y sube con los glúteos.
+Barbell_Seated_Calf_Raise|Elevación de talones sentado con barra|pantorrilla||talones sentado barra|Sentado con una barra sobre las rodillas (acolchada), eleva los talones; trabaja el sóleo.
+Calf_Raise_On_A_Dumbbell|Elevación de talones sobre mancuerna|pantorrilla||talones sobre mancuerna|Sube de puntas con las bolas de los pies sobre una mancuerna; mayor rango y equilibrio.
+Calf_Raises_-_With_Bands|Elevación de talones con banda|pantorrilla||talones con banda|Con una banda bajo los pies y sostenida con las manos, sube de puntas; ideal para entrenar en casa.
+Calf_Press|Prensa de pantorrillas en máquina|pantorrilla||prensa pantorrillas,calf press|Sentado en máquina, extiende los tobillos para empujar la plataforma; pantorrillas con carga guiada.
+# ---------------- ABDOMEN (variaciones) ----------------
+Barbell_Ab_Rollout|Rueda abdominal con barra|abdomen|Barra|rollout con barra|Rueda con una barra cargada con discos: estira y contrae el abdomen con mucha exigencia.
+Barbell_Ab_Rollout_-_On_Knees|Rueda con barra de rodillas|abdomen|Barra|rollout rodillas barra|Rollout con barra desde las rodillas; versión más accesible del rollout con barra.
+Cable_Reverse_Crunch|Crunch inverso en polea|abdomen||crunch inverso polea|Tumbado con una polea en los tobillos, enrolla la pelvis hacia el pecho; abdomen bajo con carga.
+Cable_Russian_Twists|Giro ruso en polea|abdomen||giro ruso polea|Sentado frente a la polea y con las manos juntas, gira el torso a ambos lados; oblicuos con tensión constante.
+Cable_Seated_Crunch|Crunch sentado en polea|abdomen||crunch sentado polea|Sentado y tomando la cuerda cerca de la cabeza, flexiona el torso hacia adelante.
+Standing_Rope_Crunch|Crunch de pie con cuerda|abdomen||crunch cuerda de pie|De pie, jala la cuerda desde arriba y flexiona el torso hacia el suelo; abdomen sin cargar la cadera.
+Kneeling_Cable_Crunch_With_Alternating_Oblique_Twists|Crunch en polea con giro oblicuo|abdomen||crunch polea oblicuo|Crunch de rodillas en polea añadiendo un giro del torso a cada lado; recto y oblicuos.
+One-Arm_High-Pulley_Cable_Side_Bends|Inclinación lateral en polea alta|abdomen||inclinacion lateral polea|Con un brazo en polea alta, inclínate al lado y regresa; oblicuos con tensión constante.
+Standing_Cable_Lift|Elevación diagonal en polea|abdomen||cable lift,leñador bajo,elevacion diagonal|Desde polea baja, sube el cable en diagonal por delante del cuerpo; core y rotación del tronco.
+Pallof_Press_With_Rotation|Pallof con rotación|abdomen||pallof rotacion|Press Pallof con un giro controlado del torso al final; core anti-rotación y rotación.
+Cross-Body_Crunch|Crunch cruzado|abdomen||codo a rodilla cruzado|Tumbado, lleva un codo hacia la rodilla contraria; recto abdominal y oblicuos.
+Elbow_to_Knee|Crunch oblicuo con pierna cruzada|abdomen||codo a rodilla,crunch pierna cruzada|Tumbado con una pierna cruzada sobre la rodilla contraria, lleva el codo hacia la rodilla; oblicuos.
+Decline_Oblique_Crunch|Crunch oblicuo declinado|abdomen|Banco declinado|oblicuos declinado|Crunch con giro en banco declinado; oblicuos con más recorrido.
+Decline_Reverse_Crunch|Crunch inverso declinado|abdomen|Banco declinado|inverso declinado|Sujetado a la cabecera del banco declinado, eleva las caderas llevando las rodillas al pecho.
+Exercise_Ball_Crunch|Crunch en balón|abdomen|Balón|crunch balon|Con la zona lumbar sobre un balón, flexiona el torso; mayor recorrido y activación del core.
+Exercise_Ball_Pull-In|Rodillas al pecho con balón|abdomen|Balón|pull in balon|En posición de plancha con los pies sobre el balón, encoge las rodillas al pecho; abdomen y hombros.
+Hanging_Pike|Pica colgado|abdomen|Barra fija|pica en barra,pike colgado|Colgado de la barra, sube las piernas rectas hasta tocarla con los pies; abdomen avanzado.
+Leg_Pull-In|Rodillas al pecho tumbado|abdomen||encoger piernas,tuck tumbado|Tumbado, acerca las rodillas al pecho y extiende; abdomen inferior.
+Flat_Bench_Leg_Pull-In|Rodillas al pecho en banco|abdomen|Banco|rodillas al pecho banco|Sentado al borde de un banco, lleva las rodillas al pecho inclinando el torso hacia atrás; abdomen bajo.
+3_4_Sit-Up|Abdominal tres cuartos|abdomen||sit up 3/4|Sube solo hasta tres cuartos del recorrido; mantiene la tensión abdominal sin cargar la cadera.
+Crunch_-_Hands_Overhead|Crunch con brazos extendidos|abdomen||crunch manos arriba|Crunch con los brazos estirados sobre la cabeza; más palanca y más trabajo abdominal.
+Crunch_-_Legs_On_Exercise_Ball|Crunch con piernas sobre balón|abdomen|Balón|crunch piernas balon|Tumbado con las pantorrillas sobre un balón, haz crunches; el balón estabiliza y aísla el abdomen.
+Tuck_Crunch|Crunch con piernas elevadas|abdomen||crunch tuck|Con los tobillos cruzados y las piernas elevadas, sube el torso y las rodillas al pecho; abdomen completo.
+Oblique_Crunches_-_On_The_Floor|Crunch oblicuo en el suelo|abdomen||oblicuos suelo|Tumbado con las rodillas hacia un lado, sube el hombro opuesto hacia la cadera; oblicuos.
+Spider_Crawl|Gateo de araña|abdomen||spider crawl|En posición de lagartija, lleva una rodilla hacia el codo del mismo lado caminando; core y hombros.
+Suspended_Fallout|Fallout en suspensión|abdomen|TRX / correas|fallout trx,fallout con correas|Con los brazos rectos en correas, déjate caer hacia delante y vuelve: abdomen profundo y hombros.
+Suspended_Reverse_Crunch|Crunch inverso en suspensión|abdomen|TRX / correas|crunch inverso trx|Con los pies en correas, lleva las rodillas al pecho; abdomen bajo con inestabilidad.
+Kettlebell_Windmill|Molino con pesa rusa|abdomen||windmill,molino de viento|Con una pesa rusa arriba, inclínate hacia un lado bajando la mano libre; oblicuos, hombro y movilidad.
+Landmine_180s|Giros 180° con barra landmine|abdomen|Barra|landmine twist,giros con barra|Con una barra anclada y sostenida al frente, gírala a un lado y otro con todo el tronco; oblicuos y core.
+Medicine_Ball_Full_Twist|Giro completo con balón medicinal|abdomen|Balón medicinal|giro completo balon|Giro de torso amplio con un balón medicinal en las manos; oblicuos y rotación.
+Plate_Twist|Giro con disco|abdomen|Disco|giro con disco|Sentado o de pie, gira el torso con un disco en las manos; oblicuos.
+Seated_Barbell_Twist|Giro sentado con barra|abdomen|Barra|giro con barra|Sentado con una barra sobre los hombros, gira el torso a ambos lados; oblicuos.
+Barbell_Side_Bend|Inclinación lateral con barra|abdomen|Barra|inclinacion lateral barra|De pie con una barra sobre los hombros, inclina el tronco a un lado y vuelve; oblicuos.
+One-Arm_Medicine_Ball_Slam|Golpe de balón a una mano|abdomen|Balón medicinal|slam a una mano|Levanta el balón por encima de la cabeza y lánzalo con fuerza al suelo con una mano; potencia de core.
+Weighted_Crunches|Crunch con balón medicinal|abdomen|Balón medicinal|crunch con peso|Crunch sosteniendo un balón medicinal sobre el pecho; más carga para el abdomen.
+Sledgehammer_Swings|Golpes con mazo|abdomen|Mazo|golpes de mazo,sledgehammer|Golpea un neumático con un mazo con todo el cuerpo; core, hombros y cardio.
+Alternate_Heel_Touchers|Toques alternos de talón|abdomen||toque de talon,heel touch|Tumbado con rodillas flexionadas, lleva la mano a cada talón alternando; oblicuos.
+Frog_Sit-Ups|Abdominal rana|abdomen||sit up rana,abdominal de rana|Con las plantas de los pies juntas y las rodillas abiertas, sube el torso; abdomen y movilidad de cadera.
+Cocoons|Capullo|abdomen||cocoon|Lleva las rodillas al pecho y los brazos sobre ellas, elevando ligeramente la cadera; abdomen entero.
+Janda_Sit-Up|Abdominal Janda|abdomen||janda|Sit-up lento con glúteos e isquios activos: aísla el abdomen sin ayuda de los flexores de cadera.
+Seated_Leg_Tucks|Rodillas al pecho sentado|abdomen||tuck sentado|Sentado al borde del banco, lleva las rodillas al pecho mientras inclinas el torso; abdomen bajo.
+Wind_Sprints|Rodillas alternas colgado|abdomen|Barra fija|rodillas alternas colgado,sprint colgado|Colgado de la barra, sube las rodillas lo más alto posible alternando a gran velocidad; abdomen y agarre.
+Butt-Ups|Pica en antebrazos|abdomen||elevacion de cadera antebrazos|Sobre los antebrazos como en una plancha, sube los glúteos hacia el techo y vuelve; abdomen bajo.
+Bent-Knee_Hip_Raise|Elevación de cadera con rodillas flexionadas|abdomen||elevacion de pelvis|Tumbado y con las rodillas en 75°, eleva la cadera del suelo con el abdomen bajo.
+# ---------------- CARDIO (variaciones) ----------------
+Fast_Skipping|Skipping rápido|cardio||skipping,saltitos rapidos|Saltitos alternados con poco tiempo en el aire y mucha velocidad: coordinación y cardio.
+Double_Leg_Butt_Kick|Saltos con talones al glúteo|cardio||saltos talones al gluteo|Salta lo más alto que puedas y lleva los talones al glúteo; cardio y potencia.
+Knee_Tuck_Jump|Salto con rodillas al pecho|cardio||salto tuck,salto rodillas al pecho|Salta y recoge las rodillas hacia el pecho antes de caer; cardio explosivo.
+Rocket_Jump|Salto vertical|cardio||salto cohete,salto alto|Sentadilla corta y salto vertical con los brazos arriba; cardio y potencia de piernas.
+Lateral_Bound|Saltos laterales|cardio||salto lateral,bound lateral|Salta de lado de una pierna a la otra amortiguando cada aterrizaje; cardio, glúteos y aductores.
+Carioca_Quick_Step|Carioca|cardio||carioca,paso carioca|Avanza de lado cruzando los pies por delante y por detrás con rapidez; coordinación y cardio.
+Hurdle_Hops|Saltos de vallas|cardio|Vallas|saltos de valla,hurdle hops|Salta con ambos pies una serie de vallas bajas; potencia y velocidad.
+Front_Box_Jump|Salto frontal al cajón|cardio|Cajón|salto al cajon|Salta con ambos pies sobre un cajón y baja controlado; cardio y potencia de piernas.
+Lateral_Box_Jump|Salto lateral al cajón|cardio|Cajón|salto lateral cajon|De costado a un cajón bajo, salta sobre él con un movimiento explosivo; cardio y estabilidad.
+Prowler_Sprint|Sprint con trineo|cardio|Trineo|prowler,sprint trineo|Empuja un trineo cargado en sprints cortos: cardio intenso con mucha pierna.
+Skating|Patinaje|cardio|Patines|patinar,roller|Patinar a un ritmo constante mejora el cardio y la resistencia muscular de piernas y glúteos.
+Trail_Running_Walking|Trote o caminata en sendero|cardio|Aire libre|senderismo,trail running|Terreno irregular y desniveles: cardio, equilibrio y piernas.

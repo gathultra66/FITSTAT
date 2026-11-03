@@ -1,0 +1,16 @@
+# Llaves de firma: nunca subir al repositorio
+*.keystore
+*.jks
+*.p12
+*.pfx
+keystore.properties
+local.properties
+
+# Gradle / Android
+.gradle/
+build/
+*.apk
+*.aab
+.idea/
+*.iml
+.DS_Store

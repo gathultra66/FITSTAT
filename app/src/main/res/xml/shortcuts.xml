@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="rutinas" android:enabled="true" android:icon="@drawable/ic_shortcut_routines"
+        android:shortcutShortLabel="@string/shortcut_routines" android:shortcutLongLabel="@string/shortcut_routines_long">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="app.fitstat" android:targetClass="app.fitstat.MainActivity"
+            android:data="fitstat://open/rutinas">
+            <extra android:name="route" android:value="rutinas"/>
+        </intent>
+    </shortcut>
+    <shortcut android:shortcutId="fitbot" android:enabled="true" android:icon="@drawable/ic_shortcut_bot"
+        android:shortcutShortLabel="@string/shortcut_bot" android:shortcutLongLabel="@string/shortcut_bot_long">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="app.fitstat" android:targetClass="app.fitstat.MainActivity"
+            android:data="fitstat://open/fitbot">
+            <extra android:name="route" android:value="fitbot"/>
+        </intent>
+    </shortcut>
+    <shortcut android:shortcutId="progreso" android:enabled="true" android:icon="@drawable/ic_shortcut_stats"
+        android:shortcutShortLabel="@string/shortcut_stats" android:shortcutLongLabel="@string/shortcut_stats_long">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="app.fitstat" android:targetClass="app.fitstat.MainActivity"
+            android:data="fitstat://open/progreso">
+            <extra android:name="route" android:value="progreso"/>
+        </intent>
+    </shortcut>
+</shortcuts>
