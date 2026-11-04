@@ -48,7 +48,27 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Compilar el APK firmado
-        run: ./gradlew --no-daemon --console=plain :app:assembleRelease
+        id: build
+        shell: bash
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon --console=plain :app:assembleRelease 2>&1 | tee build.log
+
+      - name: Resumen de errores de compilación
+        if: ${{ failure() && steps.build.outcome == 'failure' }}
+        run: |
+          python3 - <<'PY'
+          def esc(s):
+              return s.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          lines = open('build.log', errors='replace').read().splitlines()
+          out = []
+          for i, l in enumerate(lines):
+              if l.startswith('e: ') or 'FAILURE:' in l:
+                  out.append(l)
+              elif 'What went wrong' in l:
+                  out.extend(lines[i:i + 6])
+          print('::error title=Error al compilar el release::%s' % esc('\n'.join(out or lines[-40:])[:3500]))
+          PY
 
       - name: Verificar la firma y mostrar la huella de la llave
         run: |
