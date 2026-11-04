@@ -1,4 +1,4 @@
-# FITSTAT 1.9.2 — código fuente
+# FITSTAT 1.9.5 — código fuente
 
 App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, Android 8.0 o superior.
 
@@ -17,7 +17,7 @@ App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, A
 - En *Ajustes › FITBOT y API* pega tu clave de OpenRouter y elige el modelo (por defecto `xiaomi/mimo-v2.6-flash`).
 - La clave se guarda cifrada en el teléfono y no se incluye al exportar tus datos.
 
-## Fin del descanso (v1.9.2)
+## Fin del descanso (v1.9.5)
 - Causa del error: la pantalla calculaba el descanso con el reloj de pared, pero el aviso de fin y la reanudación de la música esperaban con un `delay()`, que solo cuenta el tiempo con el teléfono despierto. Al pausar la música el teléfono se dormía con la pantalla apagada, el `delay` se congelaba y el descanso se quedaba en 0:00 (y la música sin volver) hasta que el teléfono despertaba y se cumplía el tiempo que faltaba.
 - Arreglo: `data/WallClock.kt` (`awaitWallClock`) espera en tramos de 500 ms mirando el reloj de pared en cada uno; lo usan `WorkoutRestWatcher` y `ConnectorHub.watchRest`. `sys/RestAlarm.kt` programa una alarma del sistema (`AlarmManager`, como los recordatorios) para la hora de fin; `ReminderReceiver` la atiende con `AppState.finishRestIfDue` + `MusicRestCoordinator.onRestEnd`. Las dos rutas son idempotentes: da igual cuál llegue primero.
 - Pruebas: `WallClockTest` (y las de `watchRest` en `ConnectorsTest`, que usan tiempo simulado y deben seguir igual). Límites: no se compiló ni se probó en un teléfono; la alarma exacta depende de que el sistema la permita (si no, se usa una aproximada que puede tardar), y la receptora no hace nada si el sistema ya cerró la app.

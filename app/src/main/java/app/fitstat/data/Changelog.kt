@@ -6,7 +6,7 @@ class ChangelogEntry(val version: String, val date: String, val title: String, v
 object Changelog {
     val entries: List<ChangelogEntry> = listOf(
         ChangelogEntry(
-            version = "1.9.2",
+            version = "1.9.5",
             date = "3 nov 2026",
             title = "El descanso termina a tiempo",
             sections = listOf(

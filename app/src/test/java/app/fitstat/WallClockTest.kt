@@ -12,7 +12,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * v1.9.2: el descanso termina a su hora aunque el teléfono se duerma. Con la pantalla apagada los `delay` se congelan
+ * v1.9.5: el descanso termina a su hora aunque el teléfono se duerma. Con la pantalla apagada los `delay` se congelan
  * pero el reloj de pared sigue, y la espera debe ponerse al corriente en cuanto el teléfono despierta.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
