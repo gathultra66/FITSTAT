@@ -14,3 +14,7 @@ build/
 .idea/
 *.iml
 .DS_Store
+
+# Salidas de las pruebas y cachés (se generan solas)
+shots/
+__pycache__/
