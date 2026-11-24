@@ -491,7 +491,10 @@ private fun CurrentExerciseCard(
         haptics.confirm()
         s.restOverAt = 0L
         val allDone = isLastPending && ex.id !in s.more && n + 1 >= plan.sets
-        if (prefs.bool("train.autorest") && !allDone) s.startRest(plan.restSec, repo.now())
+        if (prefs.bool("train.autorest") && !allDone) {
+            s.startRest(plan.restSec, repo.now())
+            app.askRestReturnPermission()
+        }
     }
 
     Card(padding = PaddingValues(Fs.ui.pad(14))) {

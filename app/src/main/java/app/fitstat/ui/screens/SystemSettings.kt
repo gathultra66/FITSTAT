@@ -51,6 +51,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -64,6 +65,7 @@ import app.fitstat.data.Reminder
 import app.fitstat.data.Weekdays
 import app.fitstat.sys.Notifier
 import app.fitstat.sys.Reminders
+import app.fitstat.sys.RestReturn
 import app.fitstat.sys.WidgetArt
 import app.fitstat.sys.WidgetData
 import app.fitstat.sys.WidgetKind
@@ -278,6 +280,46 @@ internal fun RemindersSection() {
                 app.overlays.toast("Activa las notificaciones para ver el aviso.", icon = Ic.BellOff)
             }
         }, Modifier.fillMaxWidth(), kind = BtnKind.Secondary, icon = Ic.BellRing, height = 46.dp)
+    }
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// Entrenamiento: volver a FITSTAT al terminar el descanso
+// ═════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Ajustes › Entrenamiento: si «Volver a FITSTAT al terminar el descanso» está encendido pero Android todavía no deja que
+ * FITSTAT se abra sola, explica qué falta y lleva al permiso. Con el permiso dado (o la función apagada) no se muestra.
+ */
+@Composable
+internal fun RestReturnSection() {
+    val repo = LocalRepo.current
+    val ctx = LocalContext.current
+    val c = Fs.colors
+    var tick by remember { mutableIntStateOf(0) }
+    OnResume { tick++ }
+    val allowed = remember(tick) { RestReturn.mayLaunch(ctx) }
+    val on = repo.prefs.bool("train.rest_return")
+    AnimatedVisibility(
+        on && !allowed,
+        enter = expandVertically(Fs.motion.tween(260)) + fadeIn(Fs.motion.tween(220)),
+        exit = shrinkVertically(Fs.motion.tween(200)) + fadeOut(Fs.motion.tween(140)),
+    ) {
+        Card {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                IconBadge(Ic.ArrowUpRight, size = 42.dp)
+                Column(Modifier.weight(1f)) {
+                    Txt("Falta un permiso para volver sola", style = Fs.type.bodyStrong)
+                    Txt(
+                        "Para que FITSTAT se abra sola al terminar el descanso cuando estás en otra app, Android pide «Mostrar sobre otras apps». " +
+                            "Sin él te queda un aviso para volver con un toque.",
+                        style = Fs.type.small, color = c.textDim,
+                    )
+                }
+            }
+            FsButton("Dar permiso", { RestReturn.openPermission(ctx) }, Modifier.fillMaxWidth().padding(top = 12.dp).testTag("rest_return_permission"),
+                kind = BtnKind.Secondary, height = 44.dp, icon = Ic.External)
+        }
     }
 }
 

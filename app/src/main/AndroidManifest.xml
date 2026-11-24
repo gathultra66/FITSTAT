@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- v1.9.6: mientras entrenas, un servicio en primer plano mantiene a FITSTAT despierta (descanso, música y aviso). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <!-- v1.9.6: para abrirse sola al terminar el descanso si estás en otra app (Ajustes › Entrenamiento; el usuario lo da). -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- Conectores (v1.7): sueño desde Health Connect (solo lectura) y estimación con el uso del teléfono. -->
     <uses-permission android:name="android.permission.health.READ_SLEEP" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
@@ -243,6 +248,16 @@
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
+        </service>
+
+        <!-- Entrenamiento en curso: mantiene la app despierta y muestra el descanso en una notificación. -->
+        <service
+            android:name=".sys.WorkoutService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Temporizador de descanso entre series: avisa al terminar y reanuda la música del usuario." />
         </service>
 
         <receiver android:name=".sys.ReminderReceiver" android:exported="false" />

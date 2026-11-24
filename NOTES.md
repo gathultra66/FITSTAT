@@ -117,3 +117,8 @@
 
 ## v1.8.4 (29 oct 2026) — corrección del color de la portada
 - Versión 1.8.4 (código 14). Causa: `coverColorOf` promediaba todos los píxeles → gris en portadas cromadas; el tinte de fondo (12 %) apenas se notaba y hasta oscurecía. Ahora tono dominante por histograma de matiz + `vivid` + fondo/tarjetas/bordes teñidos.
+
+## v1.9.6 (24 nov 2026) — volver al terminar el descanso + música fuera de la app
+- Versión 1.9.6 (código 21). Detalle en LEEME.md. Archivos nuevos: `sys/RestReturn.kt`, `sys/WorkoutService.kt`; pruebas `RestMusicTest`, `RestReturnTest`.
+- AndroidManifest se editó a mano (el generador `tools/gen_android_res.py` ya no coincidía desde la 1.8.1: lo nuevo se agregó en los dos, pero no hay que correr el generador sin revisar el diff).
+- Entorno de esta sesión: SDK en /opt/android-sdk (`local.properties`), jar de Robolectric en /home/claude/robolectric-deps. Trampa: no armar `MainActivity` en Robolectric (la interfaz anima sin parar y `setup()` nunca queda en reposo).

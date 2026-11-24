@@ -6,6 +6,22 @@ class ChangelogEntry(val version: String, val date: String, val title: String, v
 object Changelog {
     val entries: List<ChangelogEntry> = listOf(
         ChangelogEntry(
+            version = "1.9.6",
+            date = "24 nov 2026",
+            title = "De vuelta al terminar el descanso",
+            sections = listOf(
+                "Nuevo" to listOf(
+                    "Volver a FITSTAT al terminar el descanso (Ajustes › Entrenamiento, encendido de fábrica): si durante el descanso te vas a otra app, al llegar a cero el teléfono vibra suave (dos toquecitos) y FITSTAT se abre sola en tu entrenamiento. Android pide el permiso «Mostrar sobre otras apps» para poder abrirse sola; FITSTAT te lo explica en tu primer descanso. Sin el permiso queda un aviso para volver con un toque.",
+                    "Mientras entrenas, una notificación muestra el descanso con su cuenta regresiva y te lleva al entrenamiento con un toque. Es la que mantiene a FITSTAT despierta cuando estás en otra app.",
+                ),
+                "Corrección" to listOf(
+                    "Corregido: a veces, estando fuera de FITSTAT, la música no se pausaba al empezar el descanso o no volvía al terminarlo. Android congelaba o cerraba a FITSTAT en segundo plano: no veía el fin del descanso, se perdía avisos del reproductor y hasta ignoraba sus vibraciones. Ahora FITSTAT se mantiene despierta durante el entrenamiento.",
+                    "Antes de pausar o reanudar, FITSTAT vuelve a preguntar qué suena (en vez de fiarse de lo último que supo), recuerda la canción exacta que pausó aunque la app de música deje de anunciarla, y revisa que la orden sí se haya hecho: si la app no hizo caso, la repite.",
+                    "Si aun así Android cierra FITSTAT durante el descanso, la alarma del fin del descanso reanuda la música que estaba en pausa.",
+                ),
+            ),
+        ),
+        ChangelogEntry(
             version = "1.9.5",
             date = "3 nov 2026",
             title = "El descanso termina a tiempo",

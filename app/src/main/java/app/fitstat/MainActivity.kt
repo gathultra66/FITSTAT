@@ -14,8 +14,10 @@ import app.fitstat.conn.ConnOpen
 import app.fitstat.conn.HealthAccess
 import app.fitstat.conn.Connectors
 import app.fitstat.sys.Reminders
+import app.fitstat.sys.RestReturn
 import app.fitstat.ui.app.FitstatRoot
 import app.fitstat.ui.app.Route
+import app.fitstat.ui.app.openWorkout
 
 class MainActivity : ComponentActivity() {
     private val app get() = application as FitstatApp
@@ -69,6 +71,13 @@ class MainActivity : ComponentActivity() {
         handleIntent(intent)
     }
 
+    override fun onStart() {
+        super.onStart()
+        app.state.visible = true
+        // Si quedó el aviso de «Terminó tu descanso», ya no hace falta.
+        RestReturn.clear(this)
+    }
+
     override fun onResume() {
         super.onResume()
         // Los permisos de los conectores se dan en los ajustes del sistema: al volver se revisan de nuevo.
@@ -84,6 +93,12 @@ class MainActivity : ComponentActivity() {
             app.state.nav.push(Route.Connector(Connectors.HEALTH))
             return
         }
+        // Fin del descanso (FITSTAT te regresa) o la notificación del entrenamiento: directo al entrenamiento en curso.
+        if (i?.getBooleanExtra(RestReturn.EXTRA_WORKOUT, false) == true) {
+            i.removeExtra(RestReturn.EXTRA_WORKOUT)
+            app.state.openWorkout()
+            return
+        }
         val name = i?.getStringExtra(EXTRA_ROUTE) ?: return
         i.removeExtra(EXTRA_ROUTE)
         val route = Route.fromName(name) ?: return
@@ -92,6 +107,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         super.onStop()
+        app.state.visible = false
         app.repo.flush()
     }
 

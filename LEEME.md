@@ -1,4 +1,4 @@
-# FITSTAT 1.9.5 — código fuente
+# FITSTAT 1.9.6 — código fuente
 
 App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, Android 8.0 o superior.
 
@@ -16,6 +16,14 @@ App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, A
 ## FITBOT
 - En *Ajustes › FITBOT y API* pega tu clave de OpenRouter y elige el modelo (por defecto `xiaomi/mimo-v2.6-flash`).
 - La clave se guarda cifrada en el teléfono y no se incluye al exportar tus datos.
+
+## Volver al terminar el descanso y la música fuera de la app (v1.9.6)
+- **Volver a FITSTAT** (`train.rest_return`, encendido): `finishRestIfDue` (`ui/app/Workout.kt`) ve si la app no se ve (`AppState.visible`, que marca `MainActivity.onStart/onStop`); si es así, en vez de la vibración del aviso hace `RestReturn.softBuzz` (dos toques de 35 ms al 27 % de fuerza) y `RestReturn.bringBack` abre `MainActivity` con `EXTRA_WORKOUT` (→ `openWorkout()`). Android 10+ solo deja abrirse desde segundo plano con «Mostrar sobre otras apps» (`SYSTEM_ALERT_WINDOW`): se explica una vez al empezar el primer descanso (`askRestReturnPermission`, desde `WorkoutScreen`) y queda una tarjeta en Ajustes › Entrenamiento (`RestReturnSection`). Si a los 2,5 s la app no está a la vista (sin permiso, o la marca lo bloquea), deja una notificación sin sonido en el canal `fin_descanso` para volver con un toque.
+- **El descanso lo vigila `AppState`** (antes `WorkoutRestWatcher`, un composable que desaparecía al cerrar la pantalla con «atrás»).
+- **Servicio en primer plano** (`sys/WorkoutService.kt`, tipo `specialUse`): `WorkoutKeeper.watch` lo arranca al empezar un entrenamiento y lo detiene al terminar; muestra el descanso con cuenta regresiva (canal `entrenamiento`, silencioso). Sin él, Android congelaba o cerraba a FITSTAT en segundo plano: no veía el fin del descanso, se perdían los avisos de la sesión de música, el fundido de volumen se quedaba a medias e ignoraba las vibraciones. El servicio se pasa siempre a primer plano antes de detenerse (si se detiene antes, Android cierra la app).
+- **Música** (`conn/Music.kt`, `conn/NamidaPlayer.kt`): `MusicPlayer.sync()` vuelve a leer las sesiones activas antes de pausar y de reanudar; `NamidaPlayer` recuerda la sesión que pausó (`held`) aunque deje de anunciarse como activa; `MusicRestCoordinator.confirm` revisa cada 250 ms que la orden se haya cumplido y, si en 1,5 s no cambió ni una vez, la repite (máx. 2); no reanuda otra app distinta a la que pausó. Lo pausado se guarda en `FadeStore.pausedSource/pausedUntil`; si Android cerró FITSTAT, la alarma del fin (`ReminderReceiver`) llama `MusicRescue.resume` (solo hasta 10 min después del fin y si nada suena).
+- Las vibraciones del fin del descanso usan atributos de alarma (Android ignora en segundo plano las demás).
+- Pruebas: `RestMusicTest` (17, coordinador con tiempo simulado, textos de la notificación, ajuste y registro de cambios) y `RestReturnTest` (8, Robolectric: regreso, servicio, intención y permiso). Límites: no se probó en un teléfono; el permiso «Mostrar sobre otras apps» y el bloqueo de inicio en segundo plano dependen de la versión de Android y de la marca (en Xiaomi hace falta además «Mostrar ventanas emergentes al ejecutarse en segundo plano»).
 
 ## Fin del descanso (v1.9.5)
 - Causa del error: la pantalla calculaba el descanso con el reloj de pared, pero el aviso de fin y la reanudación de la música esperaban con un `delay()`, que solo cuenta el tiempo con el teléfono despierto. Al pausar la música el teléfono se dormía con la pantalla apagada, el `delay` se congelaba y el descanso se quedaba en 0:00 (y la música sin volver) hasta que el teléfono despertaba y se cumplía el tiempo que faltaba.

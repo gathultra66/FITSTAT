@@ -19,14 +19,23 @@ internal class FakePlayer(playing: Boolean = false, connected: Boolean = true, s
     var pauses = 0
     var nexts = 0
     var prevs = 0
+    var syncs = 0
+    /** Cuántas órdenes de pausa / play ignora la app antes de hacer caso (como una app que se está acomodando). */
+    var ignorePauses = 0
+    var ignorePlays = 0
+    /** Lo que de verdad pasa en la app cuando FITSTAT vuelve a preguntar (para simular avisos que se perdieron). */
+    var onSync: (() -> Unit)? = null
     private fun set(p: Boolean) { s = MusicState(s.connected, p, s.title, s.artist, s.album, s.art, s.artKey, s.durationMs, s.source) }
-    override fun play() { plays++; set(true) }
-    override fun pause() { pauses++; set(false) }
+    override fun play() { plays++; if (ignorePlays > 0) ignorePlays-- else set(true) }
+    override fun pause() { pauses++; if (ignorePauses > 0) ignorePauses-- else set(false) }
+    override fun sync() { syncs++; onSync?.invoke() }
     override fun next() { nexts++ }
     override fun previous() { prevs++ }
     /** El usuario toca play o pausa él mismo. */
     fun userSets(p: Boolean) = set(p)
     fun close() { s = MusicState.None }
+    /** Ahora la sesión es de otra app (por ejemplo, la que se pausó se cerró y quedó otra). */
+    fun switchTo(source: String, playing: Boolean) { s = MusicState(true, playing, "Otra", "Otro", source = source) }
 }
 
 internal class FakeVolumeLogged(max: Int = 15, start: Int = 12) : VolumeControl {

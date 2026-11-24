@@ -3,14 +3,9 @@ package app.fitstat.ui.app
 import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.VibrationEffect
-import android.os.Vibrator
-import android.os.VibratorManager
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -18,10 +13,9 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import app.fitstat.bot.WorkoutStatus
 import app.fitstat.data.Fmt
-import app.fitstat.data.awaitWallClock
+import app.fitstat.sys.RestReturn
 import app.fitstat.ui.design.Ic
 
 /**
@@ -124,6 +118,23 @@ fun AppState.startWorkout(routineId: String?, exercises: List<String> = emptyLis
 }
 
 /**
+ * Al empezar el primer descanso con «Volver a FITSTAT al terminar el descanso» encendido y sin el permiso que Android
+ * pide para eso, explica para qué es y lleva a darlo (es justo cuando sueles salir a otra app). Solo se pregunta una
+ * vez; después queda en Ajustes › Entrenamiento.
+ */
+fun AppState.askRestReturnPermission() {
+    if (!RestReturn.shouldAsk(context, repo.prefs.bool("train.rest_return"))) return
+    RestReturn.markAsked(context)
+    overlays.confirm(
+        "¿Te regreso a FITSTAT al terminar el descanso?",
+        "Si durante el descanso te vas a otra app, al llegar a cero el teléfono vibra suave y FITSTAT se abre sola en tu entrenamiento. " +
+            "Para poder abrirse sola, Android pide el permiso «Mostrar sobre otras apps». Lo puedes cambiar cuando quieras en Ajustes › Entrenamiento.",
+        "Dar permiso",
+        cancelLabel = "Ahora no",
+    ) { RestReturn.openPermission(context) }
+}
+
+/**
  * Cierra el entrenamiento: primero saca sus pantallas de la pila y luego olvida la sesión.
  * (Si se olvidara antes, la pantalla que todavía se ve durante la animación de salida volvería a crear otra sesión sola.)
  */
@@ -221,29 +232,15 @@ val AppState.workoutActive: Boolean get() = workout?.let { !it.done } == true
 
 // ───────────────────────── Aviso de fin de descanso
 
-/**
- * Vigila el descanso del entrenamiento en curso aunque cambies de pantalla: cuando llega a cero
- * avisa con vibración y/o sonido según el ajuste "Aviso al terminar el descanso".
- * Si el teléfono se duerme con la pantalla apagada, a la hora lo despierta una alarma del sistema (RestAlarm).
- */
-@Composable
-fun WorkoutRestWatcher(app: AppState) {
-    val s = app.workout
-    val end = s?.restEndsAt ?: 0L
-    val ctx = LocalContext.current
-    LaunchedEffect(s, end) {
-        if (s == null || end <= 0L) return@LaunchedEffect
-        awaitWallClock(end, app.repo.now)
-        app.finishRestIfDue(ctx)
-    }
-}
-
 /** Cuánto antes de la hora se acepta terminar el descanso (los relojes pueden diferir unos milisegundos). */
 private const val REST_DUE_SLACK_MS = 1_000L
 
 /**
  * Termina el descanso si ya le tocaba y avisa (vibración/sonido). Devuelve true si lo terminó ahora.
- * Lo pueden llamar la pantalla y la alarma del sistema: solo la primera vez hace algo.
+ * Lo pueden llamar el vigilante de [AppState] y la alarma del sistema: solo la primera vez hace algo.
+ *
+ * Si FITSTAT no se ve (estás en otra app o con la pantalla apagada) y «Volver a FITSTAT al terminar el descanso» está
+ * encendido, en vez de la vibración del aviso hay dos toquecitos suaves y la app se abre sola en el entrenamiento.
  */
 fun AppState.finishRestIfDue(ctx: Context): Boolean {
     val s = workout?.takeIf { !it.done } ?: return false
@@ -251,24 +248,22 @@ fun AppState.finishRestIfDue(ctx: Context): Boolean {
     val now = repo.now()
     if (end <= 0L || now + REST_DUE_SLACK_MS < end) return false
     s.finishRest(now)
-    restAlert(ctx, repo.prefs.str("train.rest_alert"))
+    val away = repo.prefs.bool("train.rest_return") && !visible
+    restAlert(ctx, repo.prefs.str("train.rest_alert"), vibrate = !away)
+    if (away) RestReturn.bringBack(ctx) { visible }
     return true
 }
 
-fun restAlert(ctx: Context, mode: String) {
-    if (mode == "vibrate" || mode == "both") vibratePattern(ctx)
+fun restAlert(ctx: Context, mode: String, vibrate: Boolean = true) {
+    if (vibrate && (mode == "vibrate" || mode == "both")) vibratePattern(ctx)
     if (mode == "sound" || mode == "both") beep()
 }
 
 private fun vibratePattern(ctx: Context) {
     try {
-        val v: Vibrator? = if (Build.VERSION.SDK_INT >= 31) {
-            ctx.getSystemService(VibratorManager::class.java)?.defaultVibrator
-        } else {
-            @Suppress("DEPRECATION")
-            ctx.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
-        }
-        v?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 160, 100, 160, 100, 320), -1))
+        val v = RestReturn.vibrator(ctx)
+        @Suppress("DEPRECATION")
+        v?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 160, 100, 160, 100, 320), -1), RestReturn.alarmAttrs)
     } catch (_: Throwable) {
     }
 }

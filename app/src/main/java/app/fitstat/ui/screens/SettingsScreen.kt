@@ -271,6 +271,7 @@ fun SettingsPageScreen(page: String) {
             Pages.WIDGETS -> item("widgets") { Box(Modifier.enter(0)) { WidgetsSection() } }
             Pages.ICON -> item("icon") { Box(Modifier.enter(0)) { AppIconSection() } }
             Pages.REMINDERS -> item("reminders") { Box(Modifier.enter(0)) { RemindersSection() } }
+            Pages.TRAIN -> item("restreturn") { RestReturnSection() }
             Pages.CONNECTORS -> item("connectors") { ConnectorsSection() }
             Pages.MUSICFX -> item("musicfx") { Box(Modifier.enter(0)) { MusicFxSection() } }
             Pages.SLEEP -> item("sleeplink") { Box(Modifier.enter(0)) { SleepLinkCard() } }

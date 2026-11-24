@@ -205,7 +205,6 @@ private fun RootContent(app: AppState, onExit: () -> Unit) {
             }
           }
         }
-        WorkoutRestWatcher(app)
         OverlayHost(app.overlays)
         Confetti(app.confetti)
         SkinCelebrate(app.confetti)

@@ -350,7 +350,7 @@ class ConnectorHub(
         scope.launch {
             snapshotFlow(restEndsAt).collectLatest { end ->
                 if (end > 0L) {
-                    rest.onRestStart()
+                    rest.onRestStart(end)
                     awaitWallClock(end, now)
                     rest.onRestEnd()
                 } else {

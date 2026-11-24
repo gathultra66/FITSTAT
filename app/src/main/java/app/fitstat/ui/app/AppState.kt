@@ -20,7 +20,13 @@ import app.fitstat.conn.RhythmEngine
 import app.fitstat.conn.VisualizerTap
 import app.fitstat.data.LayoutPage
 import app.fitstat.data.Repo
+import app.fitstat.data.awaitWallClock
 import app.fitstat.sys.RestAlarm
+import app.fitstat.sys.RestReturn
+import app.fitstat.sys.WorkoutKeeper
+import androidx.compose.runtime.snapshotFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import app.fitstat.ui.design.Ic
 import app.fitstat.ui.design.Overlays
 import kotlinx.coroutines.CoroutineScope
@@ -85,6 +91,9 @@ class AppState(
         }
     }
 
+    /** La pantalla de FITSTAT está a la vista (lo marca la actividad en onStart/onStop). */
+    var visible by mutableStateOf(false)
+
     var confetti by mutableIntStateOf(0)
         private set
 
@@ -96,6 +105,28 @@ class AppState(
         this.connectors.watchRest({ workout?.takeIf { !it.done }?.restEndsAt ?: 0L }, { repo.now() })
         // Una alarma del sistema despierta al teléfono cuando termina el descanso (con la música pausada y la pantalla apagada se duerme).
         RestAlarm.watch(context, scope, { workout?.takeIf { !it.done }?.restEndsAt ?: 0L })
+        // El descanso termina a su hora aunque no estés viendo FITSTAT (antes lo vigilaba la pantalla, que con la app en
+        // segundo plano o cerrada con «atrás» ya no estaba). Si FITSTAT no se ve, puede regresarte (ver finishRestIfDue).
+        scope.launch {
+            snapshotFlow { workout?.takeIf { !it.done }?.restEndsAt ?: 0L }.collectLatest { end ->
+                if (end <= 0L) return@collectLatest
+                RestReturn.clear(context)
+                awaitWallClock(end, repo.now)
+                finishRestIfDue(context)
+            }
+        }
+        // Mientras entrenas, un servicio en primer plano mantiene a FITSTAT despierta (con el descanso en una notificación).
+        WorkoutKeeper.watch(context, scope) {
+            workout?.takeIf { !it.done }?.let { w ->
+                WorkoutKeeper.Info(
+                    name = w.routineId?.let { id -> repo.routine(id)?.name } ?: "Entrenamiento libre",
+                    restEndsAt = w.restEndsAt,
+                    restOver = w.restOverAt > 0L,
+                    exercise = w.exercises.getOrNull(w.index)?.let { repo.exById[it]?.name },
+                    sets = w.logIds.size,
+                )
+            }
+        }
         // NAMSTAT se entera de cuándo entrenas (y puede poner tu lista de entreno).
         this.connectors.watchWorkout { workout?.takeIf { !it.done }?.let { w -> w.routineId?.let { id -> repo.routine(id)?.name } ?: "Entrenamiento libre" } }
     }

@@ -70,6 +70,27 @@ class NamidaPlayer(
     private var started = false
     private var artJobKey = ""
 
+    /**
+     * La sesión que FITSTAT pausó por última vez. Algunas apps dejan de anunciar su sesión como «activa» mientras están en
+     * pausa (o Android deja de avisar con FITSTAT en segundo plano); sin esto, al terminar el descanso FITSTAT ya no la
+     * encontraba y la música no volvía. Se olvida cuando la app cierra esa sesión de verdad.
+     */
+    private var held: MediaController? = null
+
+    private val heldCallback = object : MediaController.Callback() {
+        override fun onSessionDestroyed() {
+            runCatching { held?.unregisterCallback(this) }
+            held = null
+        }
+    }
+
+    private fun hold(c: MediaController?) {
+        if (c == null || c.sessionToken == held?.sessionToken) return
+        runCatching { held?.unregisterCallback(heldCallback) }
+        held = c
+        runCatching { c.registerCallback(heldCallback, main) }
+    }
+
     private val sessionsChanged = MediaSessionManager.OnActiveSessionsChangedListener { list -> pick(list.orEmpty()) }
 
     private val callback = object : MediaController.Callback() {
@@ -103,13 +124,32 @@ class NamidaPlayer(
         started = false
         runCatching { controller?.unregisterCallback(callback) }
         controller = null
+        runCatching { held?.unregisterCallback(heldCallback) }
+        held = null
         state = MusicState.None
+    }
+
+    override fun sync() {
+        val m = msm ?: return
+        if (!started) {
+            start()
+            return
+        }
+        try {
+            pick(m.getActiveSessions(listener))
+        } catch (_: Throwable) {
+            // Sin acceso a notificaciones (se quitó el permiso): se queda con lo último que se supo.
+        }
     }
 
     private fun pick(list: List<MediaController>) {
         val ok = allowed()
         val mine = list.filter { c -> MusicApps.byPackage(c.packageName)?.id in ok }
-        val next = mine.firstOrNull { it.playbackState?.state == PlaybackState.STATE_PLAYING } ?: mine.firstOrNull()
+        val h = held?.takeIf { MusicApps.byPackage(it.packageName)?.id in ok }
+        // 1) la que suena; 2) la que FITSTAT pausó (aunque ya no se anuncie como activa); 3) la primera.
+        val next = mine.firstOrNull { it.playbackState?.state == PlaybackState.STATE_PLAYING }
+            ?: h?.let { mine.firstOrNull { c -> c.sessionToken == it.sessionToken } ?: it }
+            ?: mine.firstOrNull()
         if (next?.sessionToken != controller?.sessionToken) {
             runCatching { controller?.unregisterCallback(callback) }
             controller = next
@@ -164,7 +204,11 @@ class NamidaPlayer(
     }
 
     override fun play() { runCatching { controller?.transportControls?.play() } }
-    override fun pause() { runCatching { controller?.transportControls?.pause() } }
+    override fun pause() {
+        val c = controller ?: return
+        hold(c)
+        runCatching { c.transportControls.pause() }
+    }
     override fun next() { runCatching { controller?.transportControls?.skipToNext() } }
     override fun previous() { runCatching { controller?.transportControls?.skipToPrevious() } }
 }
@@ -186,4 +230,45 @@ class PrefsFadeStore(ctx: Context) : FadeStore {
     override var pendingTarget: Int
         get() = sp.getInt("fade_target", 0)
         set(v) { sp.edit().putInt("fade_target", v).apply() }
+    override var pausedSource: String
+        get() = sp.getString("paused_source", "").orEmpty()
+        set(v) { sp.edit().putString("paused_source", v).commit() }
+    override var pausedUntil: Long
+        get() = sp.getLong("paused_until", 0L)
+        set(v) { sp.edit().putLong("paused_until", v).commit() }
+}
+
+/**
+ * Reanuda la música que FITSTAT pausó cuando la app ya no está viva para hacerlo (Android la cerró durante el descanso).
+ * La llama la alarma del fin del descanso. Solo actúa si lo guardado es de un descanso que acaba de terminar, si el
+ * conector sigue con «reanudar» encendido y si esa app sigue abierta y en pausa (si ya suena algo, no hace nada).
+ */
+object MusicRescue {
+    /** Cuánto después del fin del descanso todavía tiene sentido reanudar. */
+    private const val WINDOW_MS = 10 * 60_000L
+
+    /** Decide si toca reanudar (lógica pura, para las pruebas). */
+    fun shouldResume(source: String, until: Long, now: Long, enabled: Boolean, resume: Boolean): Boolean =
+        source.isNotEmpty() && until > 0L && now >= until - 2_000L && now - until <= WINDOW_MS && enabled && resume
+
+    fun resume(ctx: Context, prefs: app.fitstat.data.Prefs, now: Long): Boolean {
+        val store = PrefsFadeStore(ctx)
+        val source = store.pausedSource
+        val until = store.pausedUntil
+        if (source.isEmpty()) return false
+        store.pausedSource = ""
+        store.pausedUntil = 0L
+        if (!shouldResume(source, until, now, prefs.bool("conn.$source.enabled"), prefs.bool("conn.$source.resume_rest"))) return false
+        val app = MusicApps.byId(source) ?: return false
+        return try {
+            val msm = ctx.getSystemService(MediaSessionManager::class.java) ?: return false
+            val list = msm.getActiveSessions(ComponentName(ctx, FitstatListener::class.java))
+            if (list.any { MusicApps.byPackage(it.packageName) != null && it.playbackState?.state == PlaybackState.STATE_PLAYING }) return false
+            val c = list.firstOrNull { it.packageName in app.packages } ?: return false
+            c.transportControls.play()
+            true
+        } catch (_: Throwable) {
+            false
+        }
+    }
 }

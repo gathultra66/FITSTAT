@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.app.NotificationManagerCompat
 import app.fitstat.FitstatApp
+import app.fitstat.conn.MusicRescue
 import app.fitstat.ui.app.finishRestIfDue
 
 /** Ejecuta [work] fuera del hilo principal sin que el sistema mate el receptor a medias. */
@@ -46,9 +47,14 @@ class ReminderReceiver : BroadcastReceiver() {
             }
             RestAlarm.ACTION_END -> {
                 // Si la app no está viva no hay descanso que terminar: no se crea todo su estado solo para mirar.
-                val state = app.stateOrNull ?: return
+                val state = app.stateOrNull
                 val pending = goAsync()
-                if (state.finishRestIfDue(ctx)) state.connectors.rest.onRestEnd()
+                if (state != null && state.finishRestIfDue(ctx)) {
+                    state.connectors.rest.onRestEnd()
+                } else if (state == null || !state.connectors.rest.pausedByUs) {
+                    // Android cerró FITSTAT durante el descanso: la música que pausó se reanuda igual (si sigue en pausa).
+                    MusicRescue.resume(ctx, repo.prefs, repo.now())
+                }
                 // Se mantiene el receptor un momento para que el teléfono no vuelva a dormirse antes de que arranque la música.
                 Handler(Looper.getMainLooper()).postDelayed({ pending.finish() }, 3_000L)
             }

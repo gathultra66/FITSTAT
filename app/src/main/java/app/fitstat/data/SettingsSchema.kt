@@ -227,6 +227,8 @@ object Settings {
         SettingSpec("train.autorest", Pages.TRAIN, "Sesión de entrenamiento", "Iniciar descanso solo", "Al completar una serie arranca el temporizador.", SType.Toggle, "true"),
         SettingSpec("train.rest_alert", Pages.TRAIN, "Sesión de entrenamiento", "Aviso al terminar el descanso", "Cómo te avisa el temporizador.",
             opts("off" to "Ninguno", "vibrate" to "Vibración", "sound" to "Sonido", "both" to "Vibración y sonido"), "vibrate"),
+        SettingSpec("train.rest_return", Pages.TRAIN, "Sesión de entrenamiento", "Volver a FITSTAT al terminar el descanso",
+            "Si estás en otra app, al llegar a cero vibra suave y te regresa al entrenamiento.", SType.Toggle, "true"),
         SettingSpec("train.keep_awake", Pages.TRAIN, "Sesión de entrenamiento", "Mantener pantalla encendida", "Durante el entrenamiento guiado.", SType.Toggle, "true"),
         SettingSpec("train.show_prev", Pages.TRAIN, "Sesión de entrenamiento", "Mostrar la serie anterior", "Te recuerda el peso y las reps de la última vez.", SType.Toggle, "true"),
 
