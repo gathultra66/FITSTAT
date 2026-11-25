@@ -429,6 +429,10 @@ manifest = '''<?xml version="1.0" encoding="utf-8"?>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <!-- v1.9.6: para abrirse sola al terminar el descanso si estás en otra app (Ajustes › Entrenamiento; el usuario lo da). -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- v1.9.7: con la pantalla apagada, el descanso termina a su hora (mantener despierto el procesador mientras dura)
+         y se puede pedir que Android no duerma a FITSTAT para ahorrar batería (Ajustes › Entrenamiento; el usuario decide). -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <!-- Conectores (v1.7): sueño desde Health Connect (solo lectura) y estimación con el uso del teléfono. -->
     <uses-permission android:name="android.permission.health.READ_SLEEP" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />

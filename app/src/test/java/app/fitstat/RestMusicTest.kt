@@ -225,13 +225,63 @@ class RestMusicTest {
         assertEquals("Entrenamiento en curso", empty.second)
     }
 
-    @Test fun changelogAnnouncesThisVersion() {
-        val e = Changelog.entries.first()
-        assertEquals(BuildConfig.VERSION_NAME, e.version)
-        assertEquals("1.9.6", e.version)
+    @Test fun changelogAnnouncesTheReturnToFitstat() {
+        val e = Changelog.entries.first { it.version == "1.9.6" }
         val text = e.sections.flatMap { it.second }.joinToString("\n")
         assertTrue(text.contains("Volver a FITSTAT al terminar el descanso"))
         assertTrue(text.contains(Settings.byKey["train.rest_return"]!!.title))
         assertTrue(text.contains("Mostrar sobre otras apps"))
+    }
+
+    @Test fun changelogAnnouncesThisVersion() {
+        val e = Changelog.entries.first()
+        assertEquals(BuildConfig.VERSION_NAME, e.version)
+        assertEquals("1.9.7", e.version)
+        val text = e.sections.flatMap { it.second }.joinToString("\n")
+        assertTrue(text.contains("pantalla apagada"))
+        assertTrue(text.contains("optimización de batería"))
+    }
+
+    // ───────── v1.9.7: la alarma del fin reintenta el play
+
+    @Test fun theAlarmRetriesThePlayRightAway() = runTest {
+        val player = FakePlayer(playing = true)
+        val c = coordinator(backgroundScope, player)
+        c.onRestStart(60_000L)
+        player.ignorePlays = 1   // FITSTAT estaba en segundo plano: la app de música no hizo caso
+        c.onRestEnd()
+        assertEquals(1, player.plays)
+        assertFalse(player.state.playing)
+        c.retryNow()   // suena la alarma del fin
+        assertEquals("se reintenta sin esperar", 2, player.plays)
+        assertTrue(player.state.playing)
+        advanceTimeBy(10_000); runCurrent()
+        assertEquals("y ya no insiste", 2, player.plays)
+    }
+
+    @Test fun theAlarmDoesNotPlayIfNothingIsPending() = runTest {
+        val player = FakePlayer(playing = true)
+        val c = coordinator(backgroundScope, player)
+        c.retryNow()
+        assertEquals("no había nada que reanudar", 0, player.plays)
+        c.onRestStart(60_000L)
+        c.retryNow()
+        assertEquals("en pleno descanso no se le da play", 0, player.plays)
+        c.onRestEnd()
+        advanceTimeBy(1_000); runCurrent()   // ya sonó: se dejó de revisar
+        player.userSets(false)               // tú la pausaste después
+        c.retryNow()
+        assertEquals("se respeta tu pausa", 1, player.plays)
+    }
+
+    @Test fun theAlarmDoesNotPlayAnotherApp() = runTest {
+        val player = FakePlayer(playing = true, source = Connectors.NAMIDA)
+        val c = coordinator(backgroundScope, player, prefs("conn.spotify.enabled" to "true"))
+        c.onRestStart(60_000L)
+        player.ignorePlays = 1
+        c.onRestEnd()
+        player.switchTo(Connectors.SPOTIFY, playing = false)
+        c.retryNow()
+        assertEquals(1, player.plays)
     }
 }

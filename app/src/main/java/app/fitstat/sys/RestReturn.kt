@@ -34,6 +34,7 @@ object RestReturn {
     private const val NOTE_ID = 0x5E56
     private const val UI_PREFS = "fitstat_ui"
     private const val KEY_ASKED = "rest_return_asked"
+    private const val KEY_BATTERY_ASKED = "battery_asked"
 
     /** Intención que abre FITSTAT directo en el entrenamiento en curso. */
     fun openIntent(ctx: Context): Intent =
@@ -60,12 +61,42 @@ object RestReturn {
         ctx.getSharedPreferences(UI_PREFS, Context.MODE_PRIVATE).edit().putBoolean(KEY_ASKED, true).apply()
     }
 
+    /** ¿La pantalla está encendida? (Con la pantalla apagada el aviso es la vibración normal, no la suave.) */
+    fun screenOn(ctx: Context): Boolean =
+        runCatching { ctx.getSystemService(PowerManager::class.java)?.isInteractive }.getOrNull() ?: true
+
+    // ───────── Optimización de batería
+
     /**
-     * El descanso terminó y FITSTAT no se ve: vibración suave y de regreso a la app. [visible] dice si FITSTAT ya está
-     * a la vista (para no dejar la notificación de respaldo si sí se abrió).
+     * ¿FITSTAT está fuera de la optimización de batería? Así Android no la duerme con la pantalla apagada (respeta su
+     * «mantener despierto» y sus alarmas) y puede despertar a la app de música desde segundo plano para reanudarla.
      */
-    fun bringBack(ctx: Context, visible: () -> Boolean) {
-        softBuzz(ctx)
+    fun batteryFree(ctx: Context): Boolean =
+        runCatching { ctx.getSystemService(PowerManager::class.java)?.isIgnoringBatteryOptimizations(ctx.packageName) }.getOrNull() ?: false
+
+    /** Abre el aviso del sistema para quitar la optimización de batería (o la lista, si ese aviso no existe). */
+    fun openBattery(ctx: Context): Boolean = runCatching {
+        ctx.startActivity(
+            Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:${ctx.packageName}")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+        )
+    }.recoverCatching {
+        ctx.startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    }.isSuccess
+
+    /** Hay que explicar lo de la batería (una sola vez). */
+    fun shouldAskBattery(ctx: Context): Boolean =
+        !batteryFree(ctx) && !ctx.getSharedPreferences(UI_PREFS, Context.MODE_PRIVATE).getBoolean(KEY_BATTERY_ASKED, false)
+
+    fun markBatteryAsked(ctx: Context) {
+        ctx.getSharedPreferences(UI_PREFS, Context.MODE_PRIVATE).edit().putBoolean(KEY_BATTERY_ASKED, true).apply()
+    }
+
+    /**
+     * El descanso terminó y FITSTAT no se ve: de regreso a la app (con [buzz], además, la vibración suave). [visible]
+     * dice si FITSTAT ya está a la vista (para no dejar la notificación de respaldo si sí se abrió).
+     */
+    fun bringBack(ctx: Context, buzz: Boolean = true, visible: () -> Boolean) {
+        if (buzz) softBuzz(ctx)
         val app = ctx.applicationContext
         val allowed = mayLaunch(app)
         runCatching { app.startActivity(openIntent(app)) }

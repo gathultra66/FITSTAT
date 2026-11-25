@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import app.fitstat.bot.WorkoutStatus
 import app.fitstat.data.Fmt
 import app.fitstat.sys.RestReturn
+import app.fitstat.sys.RestWake
 import app.fitstat.ui.design.Ic
 
 /**
@@ -118,20 +119,34 @@ fun AppState.startWorkout(routineId: String?, exercises: List<String> = emptyLis
 }
 
 /**
- * Al empezar el primer descanso con «Volver a FITSTAT al terminar el descanso» encendido y sin el permiso que Android
- * pide para eso, explica para qué es y lleva a darlo (es justo cuando sueles salir a otra app). Solo se pregunta una
- * vez; después queda en Ajustes › Entrenamiento.
+ * Al empezar un descanso explica, una sola vez cada uno, los permisos que hacen falta para que el fin del descanso
+ * funcione fuera de FITSTAT (es justo cuando sueles salir a otra app o apagar la pantalla):
+ *  1. «Mostrar sobre otras apps», si «Volver a FITSTAT al terminar el descanso» está encendido;
+ *  2. quitar la optimización de batería, para que con la pantalla apagada Android no duerma a FITSTAT y la música vuelva.
+ * Uno por descanso, para no amontonar avisos. Después quedan en Ajustes › Entrenamiento.
  */
 fun AppState.askRestReturnPermission() {
-    if (!RestReturn.shouldAsk(context, repo.prefs.bool("train.rest_return"))) return
-    RestReturn.markAsked(context)
-    overlays.confirm(
-        "¿Te regreso a FITSTAT al terminar el descanso?",
-        "Si durante el descanso te vas a otra app, al llegar a cero el teléfono vibra suave y FITSTAT se abre sola en tu entrenamiento. " +
-            "Para poder abrirse sola, Android pide el permiso «Mostrar sobre otras apps». Lo puedes cambiar cuando quieras en Ajustes › Entrenamiento.",
-        "Dar permiso",
-        cancelLabel = "Ahora no",
-    ) { RestReturn.openPermission(context) }
+    if (RestReturn.shouldAsk(context, repo.prefs.bool("train.rest_return"))) {
+        RestReturn.markAsked(context)
+        overlays.confirm(
+            "¿Te regreso a FITSTAT al terminar el descanso?",
+            "Si durante el descanso te vas a otra app, al llegar a cero el teléfono vibra suave y FITSTAT se abre sola en tu entrenamiento. " +
+                "Para poder abrirse sola, Android pide el permiso «Mostrar sobre otras apps». Lo puedes cambiar cuando quieras en Ajustes › Entrenamiento.",
+            "Dar permiso",
+            cancelLabel = "Ahora no",
+        ) { RestReturn.openPermission(context) }
+        return
+    }
+    if (RestReturn.shouldAskBattery(context)) {
+        RestReturn.markBatteryAsked(context)
+        overlays.confirm(
+            "¿Que funcione con la pantalla apagada?",
+            "Con la pantalla apagada, Android duerme a FITSTAT para ahorrar batería y a veces no la deja volver a poner tu música al terminar el descanso. " +
+                "Si quitas la optimización de batería para FITSTAT, eso no pasa. FITSTAT solo trabaja en segundo plano mientras entrenas. Lo puedes cambiar en Ajustes › Entrenamiento.",
+            "Permitir",
+            cancelLabel = "Ahora no",
+        ) { RestReturn.openBattery(context) }
+    }
 }
 
 /**
@@ -239,8 +254,9 @@ private const val REST_DUE_SLACK_MS = 1_000L
  * Termina el descanso si ya le tocaba y avisa (vibración/sonido). Devuelve true si lo terminó ahora.
  * Lo pueden llamar el vigilante de [AppState] y la alarma del sistema: solo la primera vez hace algo.
  *
- * Si FITSTAT no se ve (estás en otra app o con la pantalla apagada) y «Volver a FITSTAT al terminar el descanso» está
- * encendido, en vez de la vibración del aviso hay dos toquecitos suaves y la app se abre sola en el entrenamiento.
+ * Si FITSTAT no se ve y «Volver a FITSTAT al terminar el descanso» está encendido, la app se abre sola en el
+ * entrenamiento. Si además estás usando el teléfono en otra app, en vez de la vibración del aviso hay dos toquecitos
+ * suaves; con la pantalla apagada se usa la vibración normal del aviso.
  */
 fun AppState.finishRestIfDue(ctx: Context): Boolean {
     val s = workout?.takeIf { !it.done } ?: return false
@@ -249,8 +265,13 @@ fun AppState.finishRestIfDue(ctx: Context): Boolean {
     if (end <= 0L || now + REST_DUE_SLACK_MS < end) return false
     s.finishRest(now)
     val away = repo.prefs.bool("train.rest_return") && !visible
-    restAlert(ctx, repo.prefs.str("train.rest_alert"), vibrate = !away)
-    if (away) RestReturn.bringBack(ctx) { visible }
+    // La vibración suave es para cuando estás usando el teléfono en otra app. Con la pantalla apagada (el teléfono en
+    // la bolsa o en la banca) se usa el aviso normal: la suave no se siente.
+    val subtle = away && RestReturn.screenOn(ctx)
+    restAlert(ctx, repo.prefs.str("train.rest_alert"), vibrate = !subtle)
+    if (away) RestReturn.bringBack(ctx, buzz = subtle) { visible }
+    // La música vuelve en cuanto se avisa; unos segundos despierto para que alcance a sonar.
+    RestWake.hold(ctx, RestWake.AFTER_MS)
     return true
 }
 

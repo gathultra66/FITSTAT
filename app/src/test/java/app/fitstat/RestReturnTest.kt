@@ -2,7 +2,13 @@ package app.fitstat
 
 import android.app.Application
 import android.content.ComponentName
+import android.app.AlarmManager
+import android.os.VibrationAttributes
 import android.os.Looper
+import android.os.PowerManager
+import app.fitstat.sys.RestWake
+import org.robolectric.shadows.ShadowAlarmManager
+import org.robolectric.shadows.ShadowPowerManager
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -46,7 +52,15 @@ class RestReturnTest {
     private val now = LocalDate.of(2026, 11, 24).atTime(18, 40).atZone(zone).toInstant().toEpochMilli()
     private val ctx: Application get() = ApplicationProvider.getApplicationContext()
 
+    private val pm get() = shadowOf(ctx.getSystemService(PowerManager::class.java))
+    private val am get() = ctx.getSystemService(AlarmManager::class.java)
+    private val vibrator get() = shadowOf(RestReturn.vibrator(ctx))
+
     @Before fun clean() {
+        pm.setIsInteractive(true)
+        ShadowPowerManager.clearWakeLocks()
+        RestWake.lock = null
+        ShadowAlarmManager.setCanScheduleExactAlarms(true)
         WorkoutKeeper.running = false
         WorkoutKeeper.foreground = false
         ShadowSettings.setCanDrawOverlays(true)
@@ -164,5 +178,91 @@ class RestReturnTest {
         assertFalse("apagado no se pregunta", RestReturn.shouldAsk(ctx, enabled = false))
         RestReturn.markAsked(ctx)
         assertFalse("solo una vez", RestReturn.shouldAsk(ctx, enabled = true))
+    }
+
+    // ───────── v1.9.7: con la pantalla apagada
+
+    private val strongPattern = longArrayOf(0, 160, 100, 160, 100, 320)
+
+    @Test fun withTheScreenOffItVibratesLikeTheNormalAlert() {
+        val app = makeApp()
+        app.visible = false
+        pm.setIsInteractive(false)
+        restOver(app)
+        assertTrue(app.finishRestIfDue(ctx))
+        assertTrue("vibración normal del aviso, no la suave", strongPattern.contentEquals(vibrator.pattern))
+        assertEquals("con atributos de alarma (Android no ignora la vibración en segundo plano)",
+            VibrationAttributes.USAGE_ALARM, (vibrator.vibrationAttributesFromLastVibration as VibrationAttributes).usage)
+        assertNotNull("y FITSTAT igual queda abierta para cuando desbloquees", shadowOf(ctx).nextStartedActivity)
+    }
+
+    @Test fun inAnotherAppWithTheScreenOnTheVibrationIsSoft() {
+        val app = makeApp()
+        app.visible = false
+        pm.setIsInteractive(true)
+        restOver(app)
+        assertTrue(app.finishRestIfDue(ctx))
+        assertFalse("la suave, no la del aviso", strongPattern.contentEquals(vibrator.pattern))
+    }
+
+    @Test fun theNormalAlertCanStillBeTurnedOff() {
+        val app = makeApp("train.rest_alert" to "off")
+        app.visible = false
+        pm.setIsInteractive(false)
+        restOver(app)
+        assertTrue(app.finishRestIfDue(ctx))
+        assertFalse(strongPattern.contentEquals(vibrator.pattern))
+    }
+
+    @Test fun thePhoneStaysAwakeDuringTheRest() {
+        val app = makeApp()
+        idle()
+        val s = app.ensureWorkout("demo_r1", emptyList())
+        s.startRest(90, now)
+        idle()
+        val wl = ShadowPowerManager.getLatestWakeLock()
+        assertNotNull("se pidió mantener despierto el procesador", wl)
+        assertTrue(wl.isHeld)
+        assertEquals(RestWake.TAG, shadowOf(wl).tag)
+    }
+
+    @Test fun withTheScreenOffTheAlarmIsAnAlarmClock() {
+        val app = makeApp()
+        app.screenOn = false
+        idle()
+        val s = app.ensureWorkout("demo_r1", emptyList())
+        s.startRest(90, now)
+        idle()
+        val info = am.nextAlarmClock
+        assertNotNull("alarma de despertador: Android no la retrasa", info)
+        assertEquals(now + 90_000L, info!!.triggerTime)
+        // al encender la pantalla vuelve a ser una alarma exacta normal (sin ícono de alarma mientras usas el teléfono)
+        app.screenOn = true
+        idle()
+        assertNull(am.nextAlarmClock)
+        // y al terminar el descanso se quita
+        s.skipRest()
+        idle()
+        assertNull(am.nextAlarmClock)
+    }
+
+    @Test fun withTheScreenOnTheAlarmIsNotAnAlarmClock() {
+        val app = makeApp()
+        app.screenOn = true
+        idle()
+        app.ensureWorkout("demo_r1", emptyList()).startRest(90, now)
+        idle()
+        assertNull(am.nextAlarmClock)
+    }
+
+    @Test fun batteryOptimizationIsAskedOnlyWhenItMatters() {
+        pm.setIgnoringBatteryOptimizations(ctx.packageName, true)
+        assertTrue(RestReturn.batteryFree(ctx))
+        assertFalse(RestReturn.shouldAskBattery(ctx))
+        pm.setIgnoringBatteryOptimizations(ctx.packageName, false)
+        assertFalse(RestReturn.batteryFree(ctx))
+        assertTrue(RestReturn.shouldAskBattery(ctx))
+        RestReturn.markBatteryAsked(ctx)
+        assertFalse("solo una vez", RestReturn.shouldAskBattery(ctx))
     }
 }

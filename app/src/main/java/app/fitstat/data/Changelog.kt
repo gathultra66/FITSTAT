@@ -6,6 +6,21 @@ class ChangelogEntry(val version: String, val date: String, val title: String, v
 object Changelog {
     val entries: List<ChangelogEntry> = listOf(
         ChangelogEntry(
+            version = "1.9.7",
+            date = "25 nov 2026",
+            title = "El descanso con la pantalla apagada",
+            sections = listOf(
+                "Corrección" to listOf(
+                    "Corregido: con la pantalla apagada, al terminar el descanso la música no volvía y el teléfono no vibraba. Con la pantalla apagada el teléfono se dormía y el fin del descanso dependía de una sola alarma que Android o el ahorro de batería podían retrasar. Ahora, mientras dura el descanso, FITSTAT mantiene despierto al teléfono (solo el procesador, no la pantalla) y, con la pantalla apagada, la alarma del fin es de tipo despertador, que Android nunca retrasa.",
+                    "Con la pantalla apagada el aviso vuelve a ser la vibración normal del descanso. La vibración suave queda para cuando estás usando el teléfono en otra app.",
+                    "Si la música no alcanzó a sonar, FITSTAT vuelve a mandarle play justo cuando suena la alarma del fin, que es cuando Android más la deja despertar a la app de música.",
+                ),
+                "Nuevo" to listOf(
+                    "Ajustes › Entrenamiento te avisa si conviene quitar la optimización de batería para FITSTAT (y te lo explica una vez en un descanso). Así Android no la duerme con la pantalla apagada y siempre puede volver a poner tu música. FITSTAT solo trabaja en segundo plano mientras entrenas.",
+                ),
+            ),
+        ),
+        ChangelogEntry(
             version = "1.9.6",
             date = "24 nov 2026",
             title = "De vuelta al terminar el descanso",

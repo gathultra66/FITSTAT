@@ -115,6 +115,23 @@ class MusicRestCoordinator(
     /** Revisa que la pausa o el play que se mandó sí se haya hecho (y lo repite si la app no hizo caso). */
     private var checkJob: Job? = null
 
+    /** Lo que se está revisando: si se quiere que suene y de qué app (null = nada pendiente). */
+    private var checking: Pair<Boolean, String>? = null
+    private var checkToken: Any? = null
+
+    /**
+     * Si se está esperando a que la música vuelva a sonar y todavía no suena, vuelve a mandar el play ya. Lo usa la alarma
+     * del fin del descanso: con la pantalla apagada, justo cuando suena es cuando Android más deja a FITSTAT despertar a
+     * la app de música (en otro momento la orden puede quedarse sin efecto).
+     */
+    fun retryNow() {
+        val (want, id) = checking ?: return
+        if (!want || pausedByUs) return
+        player.sync()
+        val s = player.state
+        if (s.connected && idOf(s) == id && !s.playing) player.play()
+    }
+
     /**
      * Empieza el descanso: pausa la música si estaba sonando. [endsAt] es la hora (reloj del teléfono) en que termina;
      * se guarda junto con la app pausada para poder reanudarla aunque Android cierre FITSTAT a media pausa.
@@ -128,6 +145,7 @@ class MusicRestCoordinator(
         }
         // Un descanso nuevo: si se estaba revisando el play del anterior, ya no hay que insistir.
         checkJob?.cancel()
+        checking = null
         // Lo guardado de un descanso anterior ya no vale (por ejemplo, si la app se cerró a la mitad).
         clearSaved()
         // Lo que se sabe de la música puede estar viejo si FITSTAT estuvo en segundo plano: se pregunta de nuevo.
@@ -198,24 +216,35 @@ class MusicRestCoordinator(
      */
     private fun confirm(wantPlaying: Boolean, id: String) {
         checkJob?.cancel()
+        val token = Any()
+        checkToken = token
+        checking = wantPlaying to id
         checkJob = scope.launch {
-            var retries = 0
-            var waited = 0L
-            while (true) {
-                delay(CHECK_STEP_MS)
-                waited += CHECK_STEP_MS
-                // Ya no hace falta: empezó otro descanso, terminó este o se canceló todo.
-                if (wantPlaying == pausedByUs) return@launch
-                if (player.state.playing == wantPlaying) return@launch
-                if (waited < CHECK_RETRY_MS) continue
-                player.sync()
-                val s = player.state
-                if (!s.connected || idOf(s) != id || s.playing == wantPlaying) return@launch
-                if (retries >= 2) return@launch
-                retries++
-                waited = 0L
-                if (wantPlaying) player.play() else player.pause()
+            try {
+                watchApplied(wantPlaying, id)
+            } finally {
+                if (checkToken === token) checking = null
             }
+        }
+    }
+
+    private suspend fun watchApplied(wantPlaying: Boolean, id: String) {
+        var retries = 0
+        var waited = 0L
+        while (true) {
+            delay(CHECK_STEP_MS)
+            waited += CHECK_STEP_MS
+            // Ya no hace falta: empezó otro descanso, terminó este o se canceló todo.
+            if (wantPlaying == pausedByUs) return
+            if (player.state.playing == wantPlaying) return
+            if (waited < CHECK_RETRY_MS) continue
+            player.sync()
+            val s = player.state
+            if (!s.connected || idOf(s) != id || s.playing == wantPlaying) return
+            if (retries >= 2) return
+            retries++
+            waited = 0L
+            if (wantPlaying) player.play() else player.pause()
         }
     }
 
@@ -269,6 +298,7 @@ class MusicRestCoordinator(
     fun reset() {
         finishFade(restore = true)
         checkJob?.cancel()
+        checking = null
         pausedByUs = false
         clearSaved()
     }

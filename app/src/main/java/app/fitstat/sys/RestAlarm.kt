@@ -28,9 +28,25 @@ object RestAlarm {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
 
-    /** Programa (o mueve) la alarma para la hora [at] (ms, reloj de pared). Solo hay una a la vez. */
-    fun schedule(ctx: Context, at: Long) {
+    /**
+     * Programa (o mueve) la alarma para la hora [at] (ms, reloj de pared). Solo hay una a la vez.
+     *
+     * Con [clock] (pantalla apagada) es una alarma de despertador: Android nunca la retrasa, ni en reposo profundo ni con
+     * el ahorro de batería de la marca, y despierta al teléfono justo a la hora. Mientras la pantalla está encendida se
+     * usa una alarma exacta normal, para no mostrar el ícono de alarma en la barra mientras usas el teléfono.
+     */
+    fun schedule(ctx: Context, at: Long, clock: Boolean = false) {
         val am = ctx.getSystemService(AlarmManager::class.java) ?: return
+        if (clock && Reminders.canScheduleExact(ctx)) {
+            try {
+                val show = PendingIntent.getActivity(
+                    ctx, REQUEST + 1, RestReturn.openIntent(ctx), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+                )
+                am.setAlarmClock(AlarmManager.AlarmClockInfo(at, show), pending(ctx))
+                return
+            } catch (_: Throwable) {
+            }
+        }
         Reminders.setAlarm(ctx, am, at, pending(ctx))
     }
 
@@ -40,14 +56,15 @@ object RestAlarm {
     }
 
     /**
-     * Mantiene la alarma al día: [restEndsAt] da el momento en que termina el descanso (0 = no hay descanso).
-     * Al empezar, alargar o acortar el descanso la mueve; al saltarlo, terminarlo o cancelar el entrenamiento la quita.
+     * Mantiene la alarma al día: [restEndsAt] da el momento en que termina el descanso (0 = no hay descanso) y
+     * [screenOn] si la pantalla está encendida. Al empezar, alargar o acortar el descanso la mueve; al saltarlo,
+     * terminarlo o cancelar el entrenamiento la quita; al apagar o encender la pantalla cambia de tipo.
      */
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun watch(ctx: Context, scope: CoroutineScope, restEndsAt: () -> Long) {
+    fun watch(ctx: Context, scope: CoroutineScope, restEndsAt: () -> Long, screenOn: () -> Boolean = { true }) {
         scope.launch {
-            snapshotFlow(restEndsAt).collectLatest { end ->
-                runCatching { if (end > 0L) schedule(ctx, end) else cancel(ctx) }
+            snapshotFlow { restEndsAt() to screenOn() }.collectLatest { (end, on) ->
+                runCatching { if (end > 0L) schedule(ctx, end, clock = !on) else cancel(ctx) }
             }
         }
     }

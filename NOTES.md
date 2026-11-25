@@ -122,3 +122,7 @@
 - Versión 1.9.6 (código 21). Detalle en LEEME.md. Archivos nuevos: `sys/RestReturn.kt`, `sys/WorkoutService.kt`; pruebas `RestMusicTest`, `RestReturnTest`.
 - AndroidManifest se editó a mano (el generador `tools/gen_android_res.py` ya no coincidía desde la 1.8.1: lo nuevo se agregó en los dos, pero no hay que correr el generador sin revisar el diff).
 - Entorno de esta sesión: SDK en /opt/android-sdk (`local.properties`), jar de Robolectric en /home/claude/robolectric-deps. Trampa: no armar `MainActivity` en Robolectric (la interfaz anima sin parar y `setup()` nunca queda en reposo).
+
+## v1.9.7 (25 nov 2026) — el descanso con la pantalla apagada
+- Versión 1.9.7 (código 22). Detalle en LEEME.md. Archivo nuevo `sys/RestWake.kt`. Permisos nuevos: `WAKE_LOCK`, `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` (manifiesto y generador).
+- Trampas de pruebas: `RestWake.lock` se reutiliza entre pruebas (ponerlo en null en @Before junto con `ShadowPowerManager.clearWakeLocks()`); en SDK 35 la vibración guarda `VibrationAttributes` (`vibrationAttributesFromLastVibration`), no `AudioAttributes`.

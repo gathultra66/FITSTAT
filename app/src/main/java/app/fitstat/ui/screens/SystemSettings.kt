@@ -288,8 +288,10 @@ internal fun RemindersSection() {
 // ═════════════════════════════════════════════════════════════════════════════
 
 /**
- * Ajustes › Entrenamiento: si «Volver a FITSTAT al terminar el descanso» está encendido pero Android todavía no deja que
- * FITSTAT se abra sola, explica qué falta y lleva al permiso. Con el permiso dado (o la función apagada) no se muestra.
+ * Ajustes › Entrenamiento: los permisos que hacen falta para que el fin del descanso funcione fuera de FITSTAT.
+ *  - «Mostrar sobre otras apps», si «Volver a FITSTAT al terminar el descanso» está encendido y falta;
+ *  - quitar la optimización de batería, para que con la pantalla apagada el descanso termine a tiempo y la música vuelva.
+ * Con todo dado no se muestra nada.
  */
 @Composable
 internal fun RestReturnSection() {
@@ -299,26 +301,50 @@ internal fun RestReturnSection() {
     var tick by remember { mutableIntStateOf(0) }
     OnResume { tick++ }
     val allowed = remember(tick) { RestReturn.mayLaunch(ctx) }
+    val battery = remember(tick) { RestReturn.batteryFree(ctx) }
     val on = repo.prefs.bool("train.rest_return")
-    AnimatedVisibility(
-        on && !allowed,
-        enter = expandVertically(Fs.motion.tween(260)) + fadeIn(Fs.motion.tween(220)),
-        exit = shrinkVertically(Fs.motion.tween(200)) + fadeOut(Fs.motion.tween(140)),
-    ) {
-        Card {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                IconBadge(Ic.ArrowUpRight, size = 42.dp)
-                Column(Modifier.weight(1f)) {
-                    Txt("Falta un permiso para volver sola", style = Fs.type.bodyStrong)
-                    Txt(
-                        "Para que FITSTAT se abra sola al terminar el descanso cuando estás en otra app, Android pide «Mostrar sobre otras apps». " +
-                            "Sin él te queda un aviso para volver con un toque.",
-                        style = Fs.type.small, color = c.textDim,
-                    )
+    Column(verticalArrangement = Arrangement.spacedBy(Fs.ui.pad(14))) {
+        AnimatedVisibility(
+            on && !allowed,
+            enter = expandVertically(Fs.motion.tween(260)) + fadeIn(Fs.motion.tween(220)),
+            exit = shrinkVertically(Fs.motion.tween(200)) + fadeOut(Fs.motion.tween(140)),
+        ) {
+            Card {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    IconBadge(Ic.ArrowUpRight, size = 42.dp)
+                    Column(Modifier.weight(1f)) {
+                        Txt("Falta un permiso para volver sola", style = Fs.type.bodyStrong)
+                        Txt(
+                            "Para que FITSTAT se abra sola al terminar el descanso cuando estás en otra app, Android pide «Mostrar sobre otras apps». " +
+                                "Sin él te queda un aviso para volver con un toque.",
+                            style = Fs.type.small, color = c.textDim,
+                        )
+                    }
                 }
+                FsButton("Dar permiso", { RestReturn.openPermission(ctx) }, Modifier.fillMaxWidth().padding(top = 12.dp).testTag("rest_return_permission"),
+                    kind = BtnKind.Secondary, height = 44.dp, icon = Ic.External)
             }
-            FsButton("Dar permiso", { RestReturn.openPermission(ctx) }, Modifier.fillMaxWidth().padding(top = 12.dp).testTag("rest_return_permission"),
-                kind = BtnKind.Secondary, height = 44.dp, icon = Ic.External)
+        }
+        AnimatedVisibility(
+            !battery,
+            enter = expandVertically(Fs.motion.tween(260)) + fadeIn(Fs.motion.tween(220)),
+            exit = shrinkVertically(Fs.motion.tween(200)) + fadeOut(Fs.motion.tween(140)),
+        ) {
+            Card {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    IconBadge(Ic.Zap, size = 42.dp)
+                    Column(Modifier.weight(1f)) {
+                        Txt("Con la pantalla apagada", style = Fs.type.bodyStrong)
+                        Txt(
+                            "Android duerme a FITSTAT para ahorrar batería y a veces no la deja volver a poner tu música al terminar el descanso. " +
+                                "Quita la optimización de batería para FITSTAT (solo trabaja en segundo plano mientras entrenas).",
+                            style = Fs.type.small, color = c.textDim,
+                        )
+                    }
+                }
+                FsButton("Quitar optimización", { RestReturn.openBattery(ctx) }, Modifier.fillMaxWidth().padding(top = 12.dp).testTag("rest_battery"),
+                    kind = BtnKind.Secondary, height = 44.dp, icon = Ic.External)
+            }
         }
     }
 }

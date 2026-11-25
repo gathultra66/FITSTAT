@@ -1,4 +1,4 @@
-# FITSTAT 1.9.6 — código fuente
+# FITSTAT 1.9.7 — código fuente
 
 App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, Android 8.0 o superior.
 
@@ -16,6 +16,11 @@ App de fitness para Android (Kotlin + Jetpack Compose). Paquete `app.fitstat`, A
 ## FITBOT
 - En *Ajustes › FITBOT y API* pega tu clave de OpenRouter y elige el modelo (por defecto `xiaomi/mimo-v2.6-flash`).
 - La clave se guarda cifrada en el teléfono y no se incluye al exportar tus datos.
+
+## El descanso con la pantalla apagada (v1.9.7)
+- Error: con la pantalla apagada no volvía la música ni vibraba. (1) La 1.9.6 trataba «pantalla apagada» como «en otra app» y usaba la vibración suave, que en la bolsa no se siente. (2) El servicio en primer plano evita que Android congele la app, pero no que el procesador se duerma: dormido no corre ningún `delay`, y el fin del descanso dependía solo de la alarma exacta, que Android/la marca pueden retrasar. (3) Desde segundo plano, FITSTAT no siempre puede «despertar» a la app de música (Android solo le pasa ese permiso si FITSTAT misma podría arrancar un servicio en primer plano en ese momento).
+- Arreglo: `sys/RestWake.kt` (bloqueo parcial `fitstat:descanso` durante el descanso + 15 s, máx. 15 min; lo pide el vigilante de `AppState` y `finishRestIfDue`). `RestAlarm.schedule(clock = true)` usa `setAlarmClock` cuando la pantalla está apagada (`AppState.screenOn`, receptor de `SCREEN_ON/OFF`) y la exacta normal con la pantalla encendida (sin ícono de alarma mientras usas el teléfono). `finishRestIfDue`: vibración suave solo si la pantalla está encendida (`RestReturn.screenOn`); si no, el aviso normal. `MusicRestCoordinator.retryNow()`: la alarma del fin (`ReminderReceiver`) reintenta el play pendiente, porque al sonar la alarma exacta Android le da a FITSTAT unos segundos para arrancar servicios (y se los pasa a la app de música). Optimización de batería: tarjeta en Ajustes › Entrenamiento y aviso único en un descanso (`RestReturn.batteryFree/openBattery/shouldAskBattery`); estar fuera de ella exime a FITSTAT de esas restricciones.
+- Pruebas: `RestMusicTest` (+4) y `RestReturnTest` (+7: vibración con pantalla apagada/encendida, bloqueo parcial, alarma de despertador, batería). Límites: sin probar en teléfono; en marcas con ahorro agresivo (Xiaomi, Huawei, algunas Samsung) también hay que poner FITSTAT «Sin restricciones» en la batería de la app.
 
 ## Volver al terminar el descanso y la música fuera de la app (v1.9.6)
 - **Volver a FITSTAT** (`train.rest_return`, encendido): `finishRestIfDue` (`ui/app/Workout.kt`) ve si la app no se ve (`AppState.visible`, que marca `MainActivity.onStart/onStop`); si es así, en vez de la vibración del aviso hace `RestReturn.softBuzz` (dos toques de 35 ms al 27 % de fuerza) y `RestReturn.bringBack` abre `MainActivity` con `EXTRA_WORKOUT` (→ `openWorkout()`). Android 10+ solo deja abrirse desde segundo plano con «Mostrar sobre otras apps» (`SYSTEM_ALERT_WINDOW`): se explica una vez al empezar el primer descanso (`askRestReturnPermission`, desde `WorkoutScreen`) y queda una tarjeta en Ajustes › Entrenamiento (`RestReturnSection`). Si a los 2,5 s la app no está a la vista (sin permiso, o la marca lo bloquea), deja una notificación sin sonido en el canal `fin_descanso` para volver con un toque.

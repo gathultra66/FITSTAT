@@ -23,6 +23,11 @@ import app.fitstat.data.Repo
 import app.fitstat.data.awaitWallClock
 import app.fitstat.sys.RestAlarm
 import app.fitstat.sys.RestReturn
+import app.fitstat.sys.RestWake
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
+import androidx.core.content.ContextCompat
 import app.fitstat.sys.WorkoutKeeper
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -94,6 +99,9 @@ class AppState(
     /** La pantalla de FITSTAT está a la vista (lo marca la actividad en onStart/onStop). */
     var visible by mutableStateOf(false)
 
+    /** La pantalla del teléfono está encendida (la sigue un receptor de encendido/apagado). */
+    var screenOn by mutableStateOf(RestReturn.screenOn(context))
+
     var confetti by mutableIntStateOf(0)
         private set
 
@@ -104,13 +112,24 @@ class AppState(
         // La música (Namida, Spotify o YouTube Music) se pausa mientras dura el descanso entre series y vuelve sola al terminar.
         this.connectors.watchRest({ workout?.takeIf { !it.done }?.restEndsAt ?: 0L }, { repo.now() })
         // Una alarma del sistema despierta al teléfono cuando termina el descanso (con la música pausada y la pantalla apagada se duerme).
-        RestAlarm.watch(context, scope, { workout?.takeIf { !it.done }?.restEndsAt ?: 0L })
+        // Con la pantalla apagada es una alarma de despertador (Android no la retrasa); con la pantalla encendida, una exacta.
+        watchScreen()
+        RestAlarm.watch(context, scope, { workout?.takeIf { !it.done }?.restEndsAt ?: 0L }, { screenOn })
         // El descanso termina a su hora aunque no estés viendo FITSTAT (antes lo vigilaba la pantalla, que con la app en
         // segundo plano o cerrada con «atrás» ya no estaba). Si FITSTAT no se ve, puede regresarte (ver finishRestIfDue).
+        // Mientras dura (y unos segundos después, para la música) el procesador se mantiene despierto: con la pantalla
+        // apagada el teléfono se dormía y el descanso no terminaba hasta que alguien lo despertara.
         scope.launch {
+            var resting = false
             snapshotFlow { workout?.takeIf { !it.done }?.restEndsAt ?: 0L }.collectLatest { end ->
-                if (end <= 0L) return@collectLatest
+                if (end <= 0L) {
+                    if (resting) RestWake.hold(context, RestWake.AFTER_MS)
+                    resting = false
+                    return@collectLatest
+                }
+                resting = true
                 RestReturn.clear(context)
+                RestWake.hold(context, end - repo.now() + RestWake.AFTER_MS)
                 awaitWallClock(end, repo.now)
                 finishRestIfDue(context)
             }
@@ -132,6 +151,20 @@ class AppState(
     }
 
     fun celebrate() { confetti++ }
+
+    /** Sigue si la pantalla del teléfono se enciende o se apaga. */
+    private fun watchScreen() {
+        val r = object : BroadcastReceiver() {
+            override fun onReceive(c: Context, i: Intent) {
+                when (i.action) {
+                    Intent.ACTION_SCREEN_ON -> screenOn = true
+                    Intent.ACTION_SCREEN_OFF -> screenOn = false
+                }
+            }
+        }
+        val f = IntentFilter().apply { addAction(Intent.ACTION_SCREEN_ON); addAction(Intent.ACTION_SCREEN_OFF) }
+        runCatching { ContextCompat.registerReceiver(context.applicationContext, r, f, ContextCompat.RECEIVER_NOT_EXPORTED) }
+    }
 
     /** Los registra la actividad: piden permisos del sistema y abren ajustes. */
     var notificationPermissionRequest: (() -> Unit)? = null

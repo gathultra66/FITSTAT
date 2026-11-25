@@ -51,7 +51,12 @@ class ReminderReceiver : BroadcastReceiver() {
                 val pending = goAsync()
                 if (state != null && state.finishRestIfDue(ctx)) {
                     state.connectors.rest.onRestEnd()
-                } else if (state == null || !state.connectors.rest.pausedByUs) {
+                } else if (state != null && !state.connectors.rest.pausedByUs) {
+                    // FITSTAT ya había terminado el descanso por su cuenta: si la música todavía no suena, se reintenta ahora,
+                    // que es cuando Android más deja despertar a la app de música.
+                    state.connectors.rest.retryNow()
+                    MusicRescue.resume(ctx, repo.prefs, repo.now())
+                } else if (state == null) {
                     // Android cerró FITSTAT durante el descanso: la música que pausó se reanuda igual (si sigue en pausa).
                     MusicRescue.resume(ctx, repo.prefs, repo.now())
                 }
